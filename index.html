@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>5am.earth — Hidden insights. Real wealth.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* 'Delight' semi-bold with humanist fallbacks. If Delight is installed
+     locally it will be picked up; otherwise Manrope 600 is a very close
+     humanist-semibold match used as the display face below the hero. */
+  .dl, .specimen .big, .icongrid h2, .statement p, .loop h2, .loop-intro h2,
+  .pillars h2, .impact .copy p, .impact .big, .stack h2, .principles h2,
+  .ecosystem h2, .cred h2, .partners h2, .pillar h3, .layer h4, .eco h3,
+  .cred-cell h4, .partners .cta-big h4, .step h4, .principle h4, .foot-giant {
+    font-family: 'Delight', 'Manrope', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 600 !important;
+    letter-spacing: -.02em;
+  }
+  /* --------------------------------------------------------------
+     5am.earth — one-page landing
+     Aesthetic: bold agricultural green, soft blush pink, Arial,
+     pictogram icons inline with type, full-bleed color blocks.
+     -------------------------------------------------------------- */
+
+  :root {
+    --green:        #009a3d;
+    --green-deep:   #007a30;
+    --green-ink:    #00361a;
+    --pink:         #f5c9d6;
+    --pink-soft:    #fbe4eb;
+    --cream:        #f6f3ec;
+    --ink:          #111111;
+    --ink-60:       #555555;
+    --rule:         #111111;
+    --white:        #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Ensure [hidden] always wins — prevents display:grid/flex overrides */
+  [hidden] { display: none !important; }
+
+  html, body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ---------- Top nav ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 14px 28px;
+    font-size: 13px;
+    color: var(--white);
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+  }
+  .nav.scrolled {
+    background: var(--white);
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .nav.scrolled .nav-fiveam { color: var(--ink-60); }
+  .nav-left  { justify-self: start; font-weight: bold; letter-spacing: .02em; display:flex; align-items:center; }
+  .nav-left img {
+    height: 22px; width: auto; display: block;
+    opacity: 0; transform: translateY(-6px);
+    transition: opacity .3s ease, transform .3s ease;
+    filter: brightness(0) invert(1);
+  }
+  .nav-left.show img { opacity: 1; transform: translateY(0); }
+  .nav.scrolled .nav-left img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(85%) saturate(1694%) hue-rotate(122deg) brightness(93%) contrast(101%);
+  }
+  .nav-mid   { justify-self: center; display: flex; gap: 28px; }
+  .nav-right { justify-self: end; display: flex; gap: 18px; align-items: center; }
+  .nav a { text-transform: lowercase; font-weight: 700; }
+  .nav-mid a, .nav-right a { font-weight: 700; }
+  .nav-fiveam {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(255,255,255,.7);
+    display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+  .nav-fiveam .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(0,154,61,.6);
+    animation: heartbeat 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes heartbeat {
+    0%,100% { box-shadow: 0 0 0 0 rgba(0,154,61,.6); }
+    50%      { box-shadow: 0 0 0 5px rgba(0,154,61,0); }
+  }
+  .nav .dot { display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--green); transform: translateY(-1px); margin-right: 6px; }
+
+  /* ---------- Hero (full-bleed green w/ video) ---------- */
+  .hero {
+    background: var(--green);
+    color: var(--white);
+    padding: 140px 6vw 80px;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero .hero-bg {
+    position: absolute; inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .hero .hero-bg video,
+  .hero .hero-bg .placeholder {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero .hero-bg .placeholder {
+    background:
+      radial-gradient(ellipse 60% 80% at 30% 40%, rgba(140,210,168,.35), transparent 60%),
+      radial-gradient(ellipse 80% 100% at 80% 70%, rgba(1,99,40,.55), transparent 60%),
+      var(--green);
+  }
+  .hero .hero-bg::after {
+    /* subtle vignette so text reads */
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,154,61,.15) 0%, rgba(0,154,61,0) 30%, rgba(0,154,61,0) 60%, rgba(1,99,40,.35) 100%);
+    pointer-events: none;
+  }
+  .hero > *:not(.hero-bg) { position: relative; z-index: 1; }
+  .hero .mark {
+    position: absolute; top: 56px; left: 6vw;
+  }
+  .hero .mark img { height: 38px; width: auto; display: block; }
+
+  .hero h1 {
+    font-family: 'Delight', 'Manrope', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(48px, 6.5vw, 96px);
+    font-weight: 400;
+    line-height: .92;
+    letter-spacing: -.025em;
+    max-width: 14ch;
+    text-wrap: balance;
+    color: var(--white);
+  }
+  .hero h1 .line.l2 { color: rgb(0, 154, 61); }
+  .hero h1 .soft { opacity: .55; }
+
+  /* vertical cut reveal (hero headline) */
+  .vcr { display: inline-flex; flex-wrap: wrap; }
+  .vcr .w { display: inline-flex; overflow: hidden; }
+  .vcr .c {
+    display: inline-block;
+    transform: translateY(110%);
+    will-change: transform;
+  }
+  .vcr.in .c {
+    animation: vcrRise .9s cubic-bezier(.2,.9,.25,1.05) forwards;
+  }
+  @keyframes vcrRise {
+    from { transform: translateY(110%); }
+    to   { transform: translateY(0); }
+  }
+  .vcr .sp { display: inline-block; width: .28em; flex-shrink: 0; height: 1em; }
+  .hero h1 .line { display: block; }
+  .hero .hero-foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 64px;
+    align-items: end;
+  }
+  .hero .sub {
+    font-size: clamp(16px, 1.15vw, 20px);
+    max-width: 36ch;
+    line-height: 1.45;
+    color: var(--white);
+  }
+  .hero .ctas { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 22px;
+    font-weight: bold; font-size: 15px;
+    border: 2px solid var(--white);
+    background: transparent; color: var(--white);
+    cursor: pointer; transition: background .15s, color .15s;
+    text-transform: lowercase;
+    letter-spacing: .01em;
+  }
+  .btn:hover { background: var(--white); color: var(--green); text-decoration: none; }
+  .btn.solid { background: var(--white); color: var(--green); }
+  .btn.solid:hover { background: var(--pink); color: var(--ink); border-color: var(--pink); }
+  .btn.ink  { border-color: var(--ink); color: var(--ink); }
+  .btn.ink:hover { background: var(--ink); color: var(--white); }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* badge seal — globe with rotating text ring */
+  .hero .seal {
+    position: absolute;
+    right: 6vw; top: 56px;
+    width: 160px; height: 160px;
+    z-index: 2;
+  }
+  .seal .ring { position: absolute; inset: 0; animation: spin 28s linear infinite; }
+  .seal .globe { position: absolute; inset: 0; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .seal svg { width: 100%; height: 100%; display: block; }
+
+  /* ---------- Ticker of metrics ---------- */
+  .ticker {
+    background: var(--white);
+    border-bottom: 1px solid var(--ink);
+    overflow: hidden;
+    padding: 22px 0;
+  }
+  .ticker-track {
+    display: flex; gap: 80px; white-space: nowrap;
+    animation: marquee 40s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .ticker-item {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 20px; font-weight: bold; letter-spacing: -.01em;
+  }
+  .ticker-item .num { font-size: 28px; }
+  .ticker-item svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .ticker-item .lbl { font-weight: normal; color: var(--ink-60); font-size: 15px; }
+
+  /* ---------- Generic section ---------- */
+  section { padding: 120px 6vw; }
+  .eyebrow {
+    font-size: 12px; font-weight: bold;
+    text-transform: uppercase; letter-spacing: .22em;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 28px;
+  }
+  .eyebrow::before {
+    content: ""; width: 22px; height: 2px; background: currentColor;
+  }
+  h2 {
+    font-size: clamp(40px, 5.2vw, 88px);
+    font-weight: bold; line-height: .98; letter-spacing: -.035em;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  /* ---------- Intro (about) ---------- */
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    padding-top: 140px;
+    padding-bottom: 140px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .intro h3 { font-size: 15px; font-weight: bold; }
+  .intro .body { max-width: 68ch; font-size: 20px; line-height: 1.5; font-weight: bold; }
+  .intro .body.sm { font-size: 13px; font-weight: normal; color: var(--ink-60); margin-top: 24px; line-height: 1.55; }
+  .intro .scope { font-size: 11px; margin-top: 80px; text-transform: uppercase; letter-spacing: .18em; }
+  .intro .scope span { display:block; font-weight: bold; letter-spacing: .02em; text-transform: none; margin-top: 4px; font-size: 13px; }
+
+  /* ---------- Type specimen (pink) ---------- */
+  .specimen {
+    background: var(--pink);
+    color: var(--ink);
+    text-align: center;
+    padding: 150px 6vw;
+  }
+  .specimen .big {
+    font-size: clamp(64px, 12vw, 200px);
+    font-weight: bold;
+    line-height: .92;
+    letter-spacing: -.04em;
+  }
+  .specimen .big .reg { font-weight: normal; display: block; }
+  .specimen .caption {
+    margin-top: 40px; font-size: 13px;
+    text-transform: uppercase; letter-spacing: .22em;
+  }
+
+  /* ---------- Icon grid ---------- */
+  .icongrid {
+    background: var(--pink-soft);
+    padding: 120px 6vw;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .icongrid .head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 60px; flex-wrap: wrap; gap: 20px; }
+  .icongrid h2 { max-width: 16ch; }
+  .icongrid .note { max-width: 36ch; color: var(--ink-60); font-size: 14px; line-height: 1.5; }
+  .icons {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  .icons .cell {
+    aspect-ratio: 1 / 1;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    display: grid; place-items: center;
+    background: var(--pink-soft);
+    transition: background .2s;
+    position: relative;
+  }
+  .icons .cell:hover { background: var(--pink); }
+  .icons .cell svg { width: 44%; height: 44%; }
+  .icons .cell .lbl {
+    position: absolute; bottom: 10px; left: 0; right: 0;
+    text-align: center; font-size: 10px;
+    text-transform: uppercase; letter-spacing: .14em;
+    opacity: 0; transition: opacity .2s;
+  }
+  .icons .cell:hover .lbl { opacity: .7; }
+
+  /* ---------- Big pictogram statement ---------- */
+  .statement {
+    background: var(--green);
+    color: var(--white);
+    padding: 180px 6vw;
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+  }
+  .statement .st-eyebrow {
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .24em;
+    opacity: .8;
+    margin-bottom: 48px;
+    text-align: center;
+  }
+  .statement .st-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 28px;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(44px, 6.5vw, 112px);
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: -.028em;
+    text-align: center;
+  }
+  .statement .st-word { white-space: nowrap; }
+  .statement .st-chip {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 1.25em; height: 1.25em;
+    border: 2px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    padding: .28em;
+    flex-shrink: 0;
+    vertical-align: middle;
+    background: transparent;
+  }
+  .statement .st-chip svg {
+    width: 100%; height: 100%;
+    display: block;
+    stroke: #fff;
+    fill: none;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .statement .st-chip.filled {
+    background: #fff;
+    border-color: #fff;
+  }
+  .statement .st-chip.filled svg { stroke: var(--green); }
+
+  .statement .st-foot {
+    margin-top: 72px;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    opacity: .75;
+  }
+  .statement .st-foot .dot { width: 6px; height: 6px; background: #fff; border-radius: 50%; display: inline-block; margin-right: 10px; vertical-align: middle; }
+
+  /* ---------- Trust loop (numbered steps) ---------- */
+  .loop {
+    padding: 140px 6vw;
+    background: var(--white);
+    border-bottom: 1px solid var(--ink);
+  }
+  .loop .head { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 80px; }
+  .loop .head p { font-size: 18px; max-width: 46ch; line-height: 1.5; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--ink);
+  }
+  .step {
+    padding: 32px 20px 28px;
+    border-right: 1px solid var(--ink);
+    position: relative;
+    min-height: 260px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background .2s;
+  }
+  .step:last-child { border-right: none; }
+  .step:hover { background: var(--pink-soft); }
+  .step .n {
+    font-size: 11px; font-weight: bold;
+    letter-spacing: .22em; text-transform: uppercase;
+  }
+  .step h4 {
+    font-size: 22px; font-weight: bold; line-height: 1.1;
+    letter-spacing: -.01em;
+    margin-top: 24px;
+  }
+  .step svg { width: 36px; height: 36px; margin-top: 24px; }
+
+  /* ---------- Pillars ---------- */
+  .pillars {
+    background: var(--cream);
+    padding: 140px 6vw;
+    border-bottom: 1px solid var(--ink);
+  }
+  .pillars .head { margin-bottom: 80px; }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  .pillar {
+    padding: 40px 32px 48px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    min-height: 340px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    background: var(--cream);
+    transition: background .2s;
+  }
+  .pillar:hover { background: var(--white); }
+  .pillar .num { font-size: 48px; font-weight: bold; letter-spacing: -.03em; }
+  .pillar h3 { font-size: 26px; font-weight: bold; letter-spacing: -.01em; line-height: 1.1; margin-top: 16px; }
+  .pillar p { font-size: 15px; line-height: 1.55; color: var(--ink-60); margin-top: 16px; max-width: 36ch; }
+  .pillar svg { width: 40px; height: 40px; margin-top: 24px; }
+
+  /* ---------- Impact (84%) ---------- */
+  .impact {
+    background: var(--pink);
+    color: var(--ink);
+    padding: 160px 6vw;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .impact .big {
+    font-size: clamp(180px, 26vw, 460px);
+    font-weight: bold; line-height: .82; letter-spacing: -.05em;
+  }
+  .impact .big sup { font-size: .35em; font-weight: bold; vertical-align: super; }
+  .impact .copy p {
+    font-size: 22px; font-weight: bold; line-height: 1.2;
+    letter-spacing: -.01em;
+    margin-bottom: 40px;
+    max-width: 30ch;
+  }
+  .impact ul { list-style: none; border-top: 1px solid var(--ink); }
+  .impact li {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--ink);
+    display: flex; align-items: center; gap: 14px;
+    font-size: 16px; font-weight: bold;
+  }
+  .impact li svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  /* ---------- Architecture stack ---------- */
+  .stack {
+    padding: 140px 6vw;
+    background: var(--white);
+    border-bottom: 1px solid var(--ink);
+  }
+  .stack .head { margin-bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+  .stack .head p { font-size: 16px; color: var(--ink-60); max-width: 44ch; line-height: 1.55; }
+
+  .layers {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--ink);
+  }
+  .layer {
+    display: grid;
+    grid-template-columns: 100px 260px 1fr auto;
+    gap: 32px; align-items: center;
+    padding: 32px 32px;
+    border-bottom: 1px solid var(--ink);
+    transition: background .2s;
+  }
+  .layer:last-child { border-bottom: none; }
+  .layer:hover { background: var(--green); color: var(--white); }
+  .layer:hover .layer-tags span { border-color: var(--white); }
+  .layer .idx { font-size: 48px; font-weight: bold; letter-spacing: -.03em; }
+  .layer h4 { font-size: 28px; font-weight: bold; letter-spacing: -.015em; line-height: 1.05; }
+  .layer-tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-start; }
+  .layer-tags span {
+    font-size: 12px; padding: 6px 12px;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .layer .arrow { font-size: 28px; font-weight: bold; }
+
+  /* ---------- Principles (green) ---------- */
+  .principles {
+    background: var(--green);
+    color: var(--white);
+    padding: 160px 6vw;
+  }
+  .principles h2 { margin-bottom: 80px; }
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.3);
+    border-left: 1px solid rgba(255,255,255,.3);
+  }
+  .principle {
+    padding: 36px 28px;
+    border-right: 1px solid rgba(255,255,255,.3);
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    min-height: 200px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .principle .n { font-size: 12px; font-weight: bold; letter-spacing: .2em; }
+  .principle h4 { font-size: 22px; font-weight: bold; line-height: 1.15; letter-spacing: -.01em; }
+
+  /* ---------- Ecosystem ---------- */
+  .ecosystem {
+    background: var(--cream);
+    padding: 140px 6vw;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .ecosystem .head { margin-bottom: 80px; }
+  .eco-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink);
+  }
+  .eco {
+    padding: 40px;
+    border-right: 1px solid var(--ink);
+    background: var(--cream);
+    min-height: 420px;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .eco:last-child { border-right: none; }
+  .eco .seal-s {
+    width: 72px; height: 72px;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    margin-bottom: 40px;
+  }
+  .eco h3 { font-size: 28px; font-weight: bold; line-height: 1.1; letter-spacing: -.015em; }
+  .eco .tag { font-size: 11px; font-weight: bold; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 8px; }
+  .eco ul { list-style: none; margin-top: auto; padding-top: 40px; }
+  .eco li {
+    font-size: 15px; padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,.18);
+    display: flex; gap: 12px; align-items: start;
+  }
+  .eco li::before {
+    content: "+"; font-weight: bold; color: var(--green);
+  }
+
+  /* ---------- Credibility ---------- */
+  .cred {
+    padding: 140px 6vw;
+    background: var(--white);
+    border-bottom: 1px solid var(--ink);
+  }
+  .cred .head { margin-bottom: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+  .cred .head p { font-size: 16px; color: var(--ink-60); max-width: 44ch; line-height: 1.55; }
+  .cred-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--ink);
+  }
+  .cred-cell {
+    padding: 28px 20px 24px;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    min-height: 220px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background .2s;
+  }
+  .cred-cell:hover { background: var(--pink-soft); }
+  .cred-cell .logo {
+    height: 40px; display: flex; align-items: center;
+    font-weight: bold; font-size: 13px;
+    letter-spacing: -.01em;
+  }
+  .cred-cell .logo .mini {
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid var(--ink);
+    display: grid; place-items: center;
+    margin-right: 10px; flex-shrink: 0;
+  }
+  .cred-cell h4 { font-size: 18px; font-weight: bold; line-height: 1.15; }
+  .cred-cell p { font-size: 12px; color: var(--ink-60); line-height: 1.5; }
+
+  /* ---------- Partners CTA ---------- */
+  .partners {
+    background: var(--pink);
+    padding: 160px 6vw;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .partners h2 { font-size: clamp(48px, 7vw, 120px); max-width: 14ch; }
+  .partners .types { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; margin-top: 40px; }
+  .partners .type { font-size: 14px; display: flex; gap: 10px; align-items: center; }
+  .partners .type svg { width: 18px; height: 18px; }
+  .partners .cta-big {
+    border: 2px solid var(--ink); padding: 40px;
+    background: var(--white);
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .partners .cta-big h4 { font-size: 22px; font-weight: bold; line-height: 1.15; letter-spacing: -.01em; }
+  .partners .cta-big p { font-size: 14px; color: var(--ink-60); line-height: 1.55; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--ink);
+    color: var(--white);
+    padding: 100px 6vw 40px;
+  }
+  .foot-top {
+    display: block;
+    padding-bottom: 80px;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+    max-width: 480px;
+  }
+  .foot-email {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-top: 28px;
+    font-size: 15px; font-weight: 700;
+    color: var(--white); opacity: .85;
+    letter-spacing: -.01em;
+    transition: opacity .15s;
+  }
+  .foot-email:hover { opacity: 1; text-decoration: none; }
+  .foot-email svg { width: 18px; height: 18px; flex-shrink: 0; opacity: .7; }
+  .foot-top h5 { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 22px; opacity: .6; }
+  .foot-top ul { list-style: none; }
+  .foot-top li { padding: 6px 0; font-size: 15px; }
+  .foot-top li a:hover { opacity: .7; text-decoration: none; }
+  .foot-mark { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+  .foot-mark img { height: 28px; width: auto; display: block; }
+  .foot-mark span { font-weight: bold; font-size: 24px; letter-spacing: -.01em; }
+  .foot-desc { font-size: 14px; max-width: 32ch; line-height: 1.55; opacity: .7; }
+  .foot-bottom {
+    display: flex; justify-content: space-between;
+    margin-top: 40px;
+    font-size: 12px; opacity: .6;
+    flex-wrap: wrap; gap: 20px;
+  }
+  /* big footer word */
+  .foot-giant {
+    font-size: clamp(80px, 18vw, 320px);
+    font-weight: bold;
+    letter-spacing: -.045em;
+    line-height: .8;
+    margin-top: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* ---------- Registration modal ---------- */
+  .modal-backdrop {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0, 54, 26, 0.6);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(6px);
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--white);
+    color: var(--ink);
+    width: 100%; max-width: 580px;
+    max-height: 92vh; overflow-y: auto;
+    padding: 44px 44px 36px;
+    position: relative;
+    border: 2px solid var(--ink);
+  }
+  .modal .close {
+    position: absolute; top: 18px; right: 18px;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1.5px solid var(--ink); background: transparent;
+    cursor: pointer; display: grid; place-items: center;
+    font-size: 16px; line-height: 1; padding: 0;
+  }
+  .modal .close:hover { background: var(--ink); color: var(--white); }
+  .modal .m-eyebrow {
+    font-size: 11px; font-weight: bold;
+    text-transform: uppercase; letter-spacing: .22em;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .modal h3 {
+    font-family: 'Delight', 'Manrope', Arial, sans-serif;
+    font-weight: 600;
+    font-size: 32px; line-height: 1.1;
+    letter-spacing: -.02em;
+    margin-bottom: 28px;
+    max-width: 18ch;
+  }
+  .modal label {
+    display: block;
+    font-size: 11px; font-weight: bold;
+    text-transform: uppercase; letter-spacing: .2em;
+    color: var(--ink-60);
+    margin: 18px 0 8px;
+  }
+  .modal label:first-of-type { margin-top: 0; }
+  .modal .pills {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .modal .pill {
+    padding: 10px 16px;
+    border: 1.5px solid var(--ink);
+    background: var(--white);
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
+  .modal .pill:hover { background: var(--pink-soft); }
+  .modal .pill.active { background: var(--green); color: var(--white); border-color: var(--green); }
+  .modal input, .modal textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--ink);
+    background: var(--white);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .modal input:focus, .modal textarea:focus { border-color: var(--green); }
+  .modal textarea { resize: vertical; min-height: 90px; }
+  .modal .submit {
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px;
+    background: var(--green); color: var(--white);
+    border: 2px solid var(--green);
+    font-weight: bold; font-size: 14px;
+    text-transform: lowercase; letter-spacing: .01em;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .modal .submit:hover { background: var(--green-deep); border-color: var(--green-deep); }
+  .modal .m-foot {
+    margin-top: 16px;
+    font-size: 12px; color: var(--ink-60);
+    text-align: center;
+  }
+
+  /* ---------- Tweaks panel ---------- */
+  .tweaks {
+    border: 2px solid var(--ink);
+    padding: 18px;
+    width: 260px;
+    display: none;
+    font-size: 12px;
+  }
+  .tweaks.open { display: block; }
+  .tweaks h6 { font-size: 11px; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 14px; }
+  .tweaks .row { margin-bottom: 12px; }
+  .tweaks label { font-size: 11px; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: .14em; }
+  .tweaks .swatches { display: flex; gap: 6px; }
+  .tweaks .sw {
+    width: 28px; height: 28px; border: 2px solid var(--ink); cursor: pointer;
+  }
+  .tweaks .sw.active { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .tweaks input[type=range] { width: 100%; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .nav-mid { display: none; }
+    .hero { padding: 140px 6vw 80px; }
+    .hero .hero-foot { grid-template-columns: 1fr; }
+    .hero .ctas { justify-content: flex-start; }
+    .hero .seal { display: none; }
+    .intro, .loop .head, .stack .head, .cred .head { grid-template-columns: 1fr; gap: 32px; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .pillars-grid, .eco-grid, .principles-grid { grid-template-columns: 1fr; }
+    .icons { grid-template-columns: repeat(3, 1fr); }
+    .cred-grid { grid-template-columns: repeat(2, 1fr); }
+    .impact, .partners { grid-template-columns: 1fr; gap: 48px; }
+    .foot-top { grid-template-columns: 1fr 1fr; }
+    .layer { grid-template-columns: 60px 1fr; gap: 16px; padding: 24px; }
+    .layer-tags { grid-column: 1 / -1; }
+    .layer .arrow { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Tweak defaults (edit-mode parseable) -->
+<script>
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "hue": "green",
+    "density": "spacious"
+  }/*EDITMODE-END*/;
+</script>
+
+<!-- ============== NAV ============== -->
+<nav class="nav">
+  <div class="nav-left"><img src="logo.png" alt="5am.Earth"></div>
+  <div class="nav-mid">
+    <a href="#platform">platform</a>
+    <a href="#ecosystem">ecosystem</a>
+    <a href="#principles">principles</a>
+    <a href="#partners">partners</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-fiveam"><span class="pulse"></span><span id="fiveam-label">—</span> · 5am</span>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline id="hero-video" style="display:none"
+      onloadeddata="this.style.display='block'; document.getElementById('hero-placeholder').style.display='none'"
+      onerror="this.style.display='none'">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+    <div class="placeholder" aria-hidden="true" id="hero-placeholder"></div>
+  </div>
+  <div class="mark">
+    <img src="logo.png" alt="5am.Earth">
+  </div>
+
+  <div class="seal" aria-hidden="true">
+    <!-- rotating ring of text -->
+    <svg class="ring" viewBox="0 0 200 200">
+      <defs>
+        <path id="circlePath" d="M 100, 100 m -86, 0 a 86,86 0 1,1 172,0 a 86,86 0 1,1 -172,0" />
+      </defs>
+      <text fill="#fff" font-family="Arial" font-weight="bold" font-size="11" letter-spacing="3.6">
+        <textPath href="#circlePath">VERIFIED INSIGHTS · FARMER OWNED · ROOTED IN EARTH · SINCE 5AM · </textPath>
+      </text>
+    </svg>
+    <!-- static globe inside -->
+    <svg class="globe" viewBox="0 0 200 200">
+      <g fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round">
+        <!-- outer sphere -->
+        <circle cx="100" cy="100" r="58"/>
+        <!-- parallels (latitudes) as ellipses -->
+        <ellipse cx="100" cy="100" rx="58" ry="19"/>
+        <ellipse cx="100" cy="100" rx="58" ry="38"/>
+        <!-- meridians (longitudes) as ellipses -->
+        <ellipse cx="100" cy="100" rx="19" ry="58"/>
+        <ellipse cx="100" cy="100" rx="38" ry="58"/>
+        <!-- polar axis -->
+        <line x1="100" y1="42" x2="100" y2="158"/>
+      </g>
+      <!-- marker dot -->
+      <circle cx="123" cy="82" r="3.5" fill="#fff"/>
+    </svg>
+  </div>
+
+  <h1>
+    <span class="line vcr" data-vcr data-stagger="0.04"><span data-text="Reveal insights.">Reveal insights.</span></span>
+    <span class="line vcr l2" style="display:block; margin-top:-4px;" data-vcr data-stagger="0.04" data-delay="0.35"><span data-text="Real wealth.">Real wealth.</span></span>
+  </h1>
+
+  <div class="hero-foot">
+    <p class="sub">
+      The 5am.earth Foundation extracts the verified insights farmers need — about their land, their practices, their market — so they can make decisions that build lasting wealth and resilience.
+    </p>
+    <div class="ctas">
+      <button class="btn solid" onclick="document.getElementById('reg-modal').classList.add('open')">Get Involved
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M10 4l4 4-4 4"/></svg>
+      </button>
+      <button class="btn" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">Learn more</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TICKER ============== -->
+<div class="ticker" hidden>
+  <div class="ticker-track">
+    <!-- 2x for seamless loop -->
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span class="num">84%</span><span class="lbl">improvement in verified insights</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><span class="num">500M+</span><span class="lbl">data points processed</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16M6 16l3-4 3 2 5-6 1 3"/></svg><span class="num">$240B+</span><span class="lbl">ecosystem value unlocked</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 1-4.5 4 1 6L12 16l-5.5 3 1-6L3 9l6-1z"/></svg><span class="num">7</span><span class="lbl">founding organizations</span></div>
+    <!-- repeat -->
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span class="num">84%</span><span class="lbl">improvement in verified insights</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg><span class="num">500M+</span><span class="lbl">data points processed</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20h16M6 16l3-4 3 2 5-6 1 3"/></svg><span class="num">$240B+</span><span class="lbl">ecosystem value unlocked</span></div>
+    <div class="ticker-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 1-4.5 4 1 6L12 16l-5.5 3 1-6L3 9l6-1z"/></svg><span class="num">7</span><span class="lbl">founding organizations</span></div>
+  </div>
+</div>
+
+<!-- ============== INTRO ============== -->
+<section class="intro" id="intro">
+  <div>
+    <h3>5am.earth</h3>
+    <div class="scope">
+      About<span>Foundation, Charter 2025</span>
+    </div>
+  </div>
+  <div>
+    <p class="body">
+      5am.earth is an agricultural trust platform, conceived as a continuous loop of verified insights that connects smallholder farmers to the financial and market systems that have historically been closed to them. It is operated as a neutral foundation — not a data broker, not a platform — and is sponsored by a coalition of agri-entrepreneur networks, satellite intelligence providers, blockchain identity infrastructure and field implementation partners across South & Southeast Asia, sub-Saharan Africa, and Latin America.
+    </p>
+    <p class="body sm">
+      The foundation extracts the insights farmers need — about their land, their practices, their market — and verifies them once so they can be trusted everywhere. Farmers own the result. They decide what is shared, with whom, and when. Insights are not a feature of the product; insights are the path to farmer prosperity, and the product is the infrastructure that makes them shareable, trustable, and finally, useful.
+    </p>
+  </div>
+</section>
+
+<!-- ============== TRUST LOOP (section 02) ============== -->
+<style>
+  /* --- Trust Loop section --- */
+  .tl {
+    background: var(--pink-soft);
+    color: var(--ink);
+    padding: 140px 6vw 120px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    position: relative;
+  }
+  .tl .tl-head { text-align: center; max-width: 64ch; margin: 0 auto 80px; }
+  .tl .tl-eyebrow {
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .24em;
+    color: var(--green);
+    margin-bottom: 24px;
+  }
+  .tl h2 {
+    font-size: clamp(48px, 6.5vw, 96px);
+    line-height: .98;
+    text-wrap: balance;
+  }
+  .tl h2 .hl { color: var(--green); }
+  .tl .tl-sub {
+    margin-top: 24px;
+    font-size: 17px; line-height: 1.55;
+    color: var(--ink-60);
+    max-width: 44ch;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* stage with callout boxes around the device */
+  .tl-stage {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 0 80px;
+  }
+  .tl-stage-inner {
+    position: relative;
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    min-height: 520px;
+  }
+  .tl-stage .annot {
+    position: absolute;
+    background: var(--white);
+    border: 1px solid var(--ink);
+    padding: 16px 18px;
+    width: 210px;
+    z-index: 4;
+  }
+  .tl-stage .annot .an-n {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+  .tl-stage .annot .an-t { font-family: 'Delight','Manrope',Arial,sans-serif; font-weight: 600; font-size: 14px; letter-spacing: -.005em; margin-bottom: 4px; }
+  .tl-stage .annot .an-s { font-size: 11.5px; color: var(--ink-60); line-height: 1.4; }
+
+  .tl-stage .annot.a1 { top: 120px; left: 0; }
+  .tl-stage .annot.a2 {
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: auto; padding: 10px 16px;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green); color: var(--white);
+    border-color: var(--green);
+  }
+  .tl-stage .annot.a2 .dot { width: 8px; height: 8px; background: var(--white); border-radius: 50%; flex-shrink: 0; }
+  .tl-stage .annot.a2 span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; }
+  .tl-stage .annot.a3 { top: 120px; right: 0; }
+
+  /* connector lines from annotations into the stage */
+  .tl-stage .wire {
+    position: absolute; z-index: 2;
+    border-top: 1px dashed rgba(0,0,0,.35);
+  }
+  .tl-stage .wire.w1 { top: 145px; left: 210px; width: calc(50% - 210px - 340px); }
+  .tl-stage .wire.w3 { top: 145px; right: 210px; width: calc(50% - 210px - 340px); }
+
+  /* device composition */
+  .tl-device {
+    position: absolute;
+    left: 50%; top: 60px;
+    transform: translateX(-50%);
+    width: 680px; height: 420px;
+    background: var(--white);
+    border: 1px solid var(--ink);
+    display: grid; grid-template-columns: 1fr; place-items: center;
+  }
+  .tl-device::before {
+    /* subtle grid texture */
+    content: "";
+    position: absolute; inset: 40px;
+    background-image:
+      linear-gradient(to right, rgba(0,154,61,.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,154,61,.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+  }
+  .tl-device .node {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(0,154,61,.18);
+  }
+  .tl-device .node.n1 { top: 90px; left: 240px; animation: tl-pulse 3.2s ease-in-out infinite; }
+  .tl-device .node.n2 { top: 140px; left: 380px; animation: tl-pulse 3.2s ease-in-out .4s infinite; }
+  .tl-device .node.n3 { top: 200px; left: 280px; animation: tl-pulse 3.2s ease-in-out .8s infinite; }
+  .tl-device .node.n4 { top: 250px; left: 420px; animation: tl-pulse 3.2s ease-in-out 1.2s infinite; }
+  .tl-device .node.n5 { top: 300px; left: 200px; animation: tl-pulse 3.2s ease-in-out 1.6s infinite; }
+  .tl-device .node.n6 { top: 180px; left: 500px; animation: tl-pulse 3.2s ease-in-out 2.0s infinite; }
+  @keyframes tl-pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0,154,61,.18); transform: scale(1); }
+    50% { box-shadow: 0 0 0 9px rgba(0,154,61,.05); transform: scale(1.15); }
+  }
+
+  /* desktop skeleton rows */
+  .tl-device .d-top {
+    position: absolute; top: 20px; left: 20px; right: 20px;
+    display: flex; gap: 12px;
+  }
+  .tl-device .d-top .bar { flex: 1; height: 14px; background: var(--ink); opacity: .08; }
+  .tl-device .d-top .bar.a { background: var(--green); opacity: .35; animation: tl-bar 4.5s ease-in-out infinite; transform-origin: left; }
+  @keyframes tl-bar {
+    0%, 100% { transform: scaleX(.55); opacity: .25; }
+    50% { transform: scaleX(1); opacity: .55; }
+  }
+  .tl-device .d-side {
+    position: absolute; top: 60px; right: 20px; width: 28px; bottom: 60px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .tl-device .d-side .cell { flex: 1; background: var(--ink); opacity: .08; }
+  .tl-device .d-side .cell.active { background: var(--green); opacity: 1; animation: tl-active 5s ease-in-out infinite; }
+  @keyframes tl-active {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,154,61,0); }
+    50% { box-shadow: 0 0 0 4px rgba(0,154,61,.25); }
+  }
+
+  /* trust score chip on desktop */
+  .tl-device .score {
+    position: absolute; bottom: 18px; right: 60px;
+    background: var(--green); color: var(--white);
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    padding: 6px 12px;
+    display: flex; align-items: center; gap: 8px;
+    animation: tl-score 4s ease-in-out infinite;
+  }
+  @keyframes tl-score {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  .tl-device .score::before { content: ""; width: 6px; height: 6px; background: var(--white); border-radius: 50%; }
+
+  /* phone on top of desktop */
+  .tl-phone {
+    position: absolute;
+    bottom: -40px; left: 110px;
+    width: 180px; height: 340px;
+    background: var(--ink);
+    border-radius: 26px;
+    padding: 10px;
+    z-index: 3;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,.25);
+    animation: tl-float 6s ease-in-out infinite;
+  }
+  @keyframes tl-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .tl-phone .ph-screen {
+    background: var(--white);
+    border-radius: 18px;
+    height: 100%;
+    padding: 18px 14px;
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative;
+  }
+  .tl-phone .ph-notch {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    width: 48px; height: 4px; background: #333; border-radius: 2px;
+  }
+  .tl-phone .ph-pill { background: var(--green); height: 14px; width: 70%; border-radius: 999px; margin-top: 18px; animation: tl-ph-pill 3s ease-in-out infinite; }
+  @keyframes tl-ph-pill {
+    0%, 100% { width: 55%; }
+    50% { width: 78%; }
+  }
+  .tl-phone .ph-row { display: flex; align-items: center; gap: 10px; }
+  .tl-phone .ph-row .dot { width: 10px; height: 10px; background: var(--green); border-radius: 50%; flex-shrink: 0; animation: tl-blink 1.6s ease-in-out infinite; }
+  .tl-phone .ph-row:nth-of-type(2) .dot { animation-delay: .4s; }
+  .tl-phone .ph-row:nth-of-type(3) .dot { animation-delay: .8s; }
+  @keyframes tl-blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .35; transform: scale(.85); }
+  }
+  .tl-phone .ph-row .bar { flex: 1; height: 8px; background: rgba(0,0,0,.08); border-radius: 2px; }
+  .tl-phone .ph-row .bar.s { flex: 0 0 60%; }
+  .tl-phone .ph-btn {
+    margin-top: auto;
+    background: var(--green); color: var(--white);
+    height: 36px; border-radius: 6px;
+    display: grid; place-items: center;
+    font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  }
+
+  /* 3 columns below device */
+  .tl-cols {
+    max-width: 1080px;
+    margin: 56px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .tl-col {
+    padding: 32px 32px 24px;
+    position: relative;
+  }
+  .tl-col + .tl-col::before {
+    content: "";
+    position: absolute;
+    left: -10px; top: 50%;
+    width: 28px; height: 12px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 12' fill='none' stroke='%23111' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M1 6h24M20 1l5 5-5 5'/></svg>") center/contain no-repeat;
+    transform: translateY(-50%);
+  }
+  .tl-col .c-n {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+    position: relative; padding-top: 14px;
+  }
+  .tl-col .c-n::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 40px; height: 2px; background: var(--green);
+  }
+  .tl-col h4 {
+    font-family: 'Delight','Manrope',Arial,sans-serif;
+    font-weight: 600; font-size: 22px; letter-spacing: -.015em;
+    margin-bottom: 12px; line-height: 1.1;
+  }
+  .tl-col p { font-size: 14px; line-height: 1.55; color: var(--ink-60); max-width: 34ch; }
+
+  /* 3 feature callouts */
+  .tl-feats {
+    max-width: 1080px;
+    margin: 48px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .tl-feat { display: flex; gap: 14px; align-items: flex-start; }
+  .tl-feat .ico {
+    width: 32px; height: 32px;
+    border: 1px solid var(--ink);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+  }
+  .tl-feat .ico svg { width: 16px; height: 16px; }
+  .tl-feat h5 {
+    font-family: 'Delight','Manrope',Arial,sans-serif;
+    font-weight: 600; font-size: 14px; letter-spacing: -.005em;
+    margin-bottom: 4px;
+  }
+  .tl-feat p { font-size: 12.5px; line-height: 1.5; color: var(--ink-60); }
+
+  @media (max-width: 780px) {
+    .tl-stage { padding-bottom: 40px; }
+    .tl-stage-inner { min-height: 0; }
+    .tl-stage .annot { position: static; width: 100%; margin-bottom: 16px; transform: none; }
+    .tl-stage .annot.a2 { margin: 0 auto 16px; width: max-content; }
+    .tl-stage .wire { display: none; }
+    .tl-device { position: relative; left: auto; top: auto; transform: none; width: 100%; max-width: 520px; height: 360px; margin: 0 auto; }
+    .tl-device .node.n4, .tl-device .node.n6 { display: none; }
+    .tl-phone { left: 20px; bottom: -30px; width: 140px; height: 260px; }
+    .tl-cols, .tl-feats { grid-template-columns: 1fr; }
+    .tl-col + .tl-col::before { display: none; }
+  }
+</style>
+
+<section class="tl" id="platform">
+  <div class="tl-head">
+    <div class="tl-eyebrow">02 · The platform</div>
+    <h2>One loop. <span class="hl">Endless trust.</span></h2>
+    <p class="tl-sub">A closed-loop data architecture where farmer identity is verified once at the infrastructure layer — then trusted everywhere.</p>
+  </div>
+
+  <div class="tl-stage">
+   <div class="tl-stage-inner">
+    <!-- 3 annotations -->
+    <div class="annot a1">
+      <div class="an-n">01</div>
+      <div class="an-t">Farmer submits data</div>
+      <div class="an-s">Sovereign mobile identity wallet</div>
+    </div>
+    <div class="annot a2">
+      <span class="dot"></span>
+      <span>02 — Verified at protocol layer</span>
+    </div>
+    <div class="annot a3">
+      <div class="an-n">03</div>
+      <div class="an-t">Institutions trust everywhere</div>
+      <div class="an-s">Zero re-verification needed</div>
+    </div>
+
+    <!-- connector wires -->
+    <div class="wire w1"></div>
+    <div class="wire w3"></div>
+
+    <!-- device composition: desktop panel with phone overlapping -->
+    <div class="tl-device">
+      <div class="d-top">
+        <div class="bar"></div>
+        <div class="bar a"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="d-side">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell active"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+
+      <!-- nodes scattered in the grid -->
+      <div class="node n1"></div>
+      <div class="node n2"></div>
+      <div class="node n3"></div>
+      <div class="node n4"></div>
+      <div class="node n5"></div>
+      <div class="node n6"></div>
+
+      <div class="score">99.2% trust score</div>
+
+      <!-- phone overlapping -->
+      <div class="tl-phone">
+        <div class="ph-screen">
+          <div class="ph-notch"></div>
+          <div class="ph-pill"></div>
+          <div class="ph-row"><span class="dot"></span><span class="bar"></span></div>
+          <div class="ph-row"><span class="dot"></span><span class="bar s"></span></div>
+          <div class="ph-row"><span class="dot"></span><span class="bar"></span></div>
+          <div class="ph-btn">submit &amp; sign</div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- 3 narrative columns -->
+  <div class="tl-cols">
+    <div class="tl-col">
+      <div class="c-n">01</div>
+      <h4>Farmer submits data</h4>
+      <p>Via a sovereign mobile wallet, farmers build a cryptographically verified digital identity — land records, crop history, financial standing.</p>
+    </div>
+    <div class="tl-col">
+      <div class="c-n">02</div>
+      <h4>Verified once at protocol</h4>
+      <p>The Foundation attests each data point at the infrastructure level. One verification is trusted by every downstream participant forever.</p>
+    </div>
+    <div class="tl-col">
+      <div class="c-n">03</div>
+      <h4>Institutions access trust</h4>
+      <p>Banks, insurers, and NGOs read verified credentials instantly via open APIs. No re-verification. No duplicated cost. No data silos.</p>
+    </div>
+  </div>
+
+  <!-- 3 feature callouts -->
+  <div class="tl-feats">
+    <div class="tl-feat">
+      <div class="ico">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l6 3v5c0 4-3 6-6 6s-6-2-6-6V6z"/><path d="M7 10l2 2 4-4"/></svg>
+      </div>
+      <div>
+        <h5>Farmer-sovereign identity</h5>
+        <p>Data cannot be shared without explicit consent. Farmers hold their own credentials — no platform can revoke access.</p>
+      </div>
+    </div>
+    <div class="tl-feat">
+      <div class="ico">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2l-6 8h4l-1 8 6-9H9z"/></svg>
+      </div>
+      <div>
+        <h5>60–80% cost reduction</h5>
+        <p>Institutions eliminate redundant KYC and compliance cycles. Verify once, deploy everywhere.</p>
+      </div>
+    </div>
+    <div class="tl-feat">
+      <div class="ico">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a12 12 0 010 14M10 3a12 12 0 000 14"/></svg>
+      </div>
+      <div>
+        <h5>Open by design</h5>
+        <p>W3C Verifiable Credentials + DIDs mean any compliant system reads the credential. No vendor lock-in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============== TYPE SPECIMEN ============== -->
+<section class="specimen" hidden>
+  <div class="big">
+    Hidden insights.<br/>
+    <span class="reg">Real wealth.</span>
+  </div>
+  <div class="caption">Arial Bold / Arial Regular · The brand voice of 5am.earth</div>
+</section>
+
+<!-- ============== STATEMENT ============== -->
+<section class="statement">
+  <div class="st-eyebrow">The foundation's mission</div>
+  <div class="st-wrap">
+    <span class="st-chip filled" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>
+    </span>
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="Verified" data-stagger="0.03" data-delay="0"></span>
+
+    <span class="st-chip" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+    </span>
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="insights" data-stagger="0.03" data-delay="0.35"></span>
+
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="from the" data-stagger="0.03" data-delay="0.7" style="opacity:.7"></span>
+
+    <span class="st-chip" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-4 3.5-7 7-7s7 3 7 7"/></svg>
+    </span>
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="farmers" data-stagger="0.03" data-delay="1.05"></span>
+
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="who feed" data-stagger="0.03" data-delay="1.4" style="opacity:.7"></span>
+
+    <span class="st-chip filled" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>
+    </span>
+    <span class="st-word vcr" data-vcr data-vcr-scroll data-text="the world." data-stagger="0.03" data-delay="1.75"></span>
+  </div>
+
+  <div class="st-foot">
+    <span><span class="dot"></span>Farmer-owned data</span>
+    <span><span class="dot"></span>Cryptographically verified</span>
+    <span><span class="dot"></span>Open protocol</span>
+  </div>
+</section>
+
+<!-- ============== PILLARS ============== -->
+<section class="pillars">
+  <div class="head">
+    <div class="eyebrow">03 · Core pillars</div>
+    <h2>Three things we do differently.</h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div>
+        <div class="num">01</div>
+        <h3>Intelligence from multiple sources</h3>
+        <p>Satellite, ground truth and market signals continuously synced and verified into a single actionable stream of insights — no one channel on its own, always three in agreement.</p>
+      </div>
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="20" cy="20" r="3"/><circle cx="20" cy="20" r="9"/><circle cx="20" cy="20" r="15"/><circle cx="20" cy="20" r="1.5" fill="currentColor"/></svg>
+    </div>
+    <div class="pillar">
+      <div>
+        <div class="num">02</div>
+        <h3>Farmer agency &amp; control</h3>
+        <p>Farmers own their insights and decide what is shared, with whom, and when. Data sovereignty is enforced at the identity layer — we cannot share what the farmer hasn't released.</p>
+      </div>
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 6l12 5v10c0 8-5 12-12 14-7-2-12-6-12-14V11z"/><path d="M14 20l4 4 8-8"/></svg>
+    </div>
+    <div class="pillar">
+      <div>
+        <div class="num">03</div>
+        <h3>Infrastructure access unlocked</h3>
+        <p>Verified insights unlock formal credit, crop insurance and premium markets that were previously closed to smallholders — the same insight, used many times, by many institutions.</p>
+      </div>
+      <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="6" y="18" width="16" height="16" rx="2"/><path d="M14 18v-6a6 6 0 0112 0v6"/><path d="M22 26h6M22 30h10"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============== IMPACT ============== -->
+<section class="impact" hidden>
+  <div class="big">84<sup>%</sup></div>
+  <div class="copy">
+    <p>Improvement in verified, actionable insights driving farmer decisions.</p>
+    <ul>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Access to formal credit</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>A unified insights layer</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Premium market access</li>
+      <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-8"/></svg>Risk-based financial products</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============== ARCHITECTURE ============== -->
+<section class="stack">
+  <div class="head">
+    <div>
+      <div class="eyebrow">04 · Platform architecture</div>
+      <h2>A four-layer open infrastructure stack.</h2>
+    </div>
+    <p>Each layer is independently adoptable and composes upward into the farmer-facing application. No layer is proprietary; every layer is verifiable.</p>
+  </div>
+  <div class="layers">
+    <div class="layer">
+      <div class="idx">01</div>
+      <h4>Intelligence Layer</h4>
+      <div class="layer-tags">
+        <span>Satellite · land + crop + productivity</span>
+        <span>Ground · field agents, farmer data</span>
+        <span>Market · prices, buyer demand</span>
+      </div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="layer">
+      <div class="idx">02</div>
+      <h4>Trust Layer</h4>
+      <div class="layer-tags">
+        <span>Blockchain verification</span>
+        <span>Farmer DID · data sovereignty</span>
+        <span>Audit trails &amp; immutable records</span>
+      </div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="layer">
+      <div class="idx">03</div>
+      <h4>Analysis Layer</h4>
+      <div class="layer-tags">
+        <span>AI-powered insights</span>
+        <span>Risk &amp; opportunity detection</span>
+        <span>Financial readiness</span>
+      </div>
+      <div class="arrow">→</div>
+    </div>
+    <div class="layer">
+      <div class="idx">04</div>
+      <h4>Application Layer</h4>
+      <div class="layer-tags">
+        <span>Farmer dashboards</span>
+        <span>Institutional access</span>
+        <span>Market &amp; financial integrations</span>
+      </div>
+      <div class="arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PRINCIPLES ============== -->
+<section class="principles" id="principles">
+  <div class="eyebrow">05 · Principles</div>
+  <h2>What we believe.<br/>How we build.<br/>Why it matters.</h2>
+  <div class="principles-grid">
+    <div class="principle"><div class="n">I.</div><h4>Farmer data sovereignty. Always.</h4></div>
+    <div class="principle"><div class="n">II.</div><h4>Verify once. Use infinitely.</h4></div>
+    <div class="principle"><div class="n">III.</div><h4>Open standards, interoperable by design.</h4></div>
+    <div class="principle"><div class="n">IV.</div><h4>Neutral ecosystem stewardship — not a platform, not a broker.</h4></div>
+    <div class="principle"><div class="n">V.</div><h4>Human-in-the-loop. Technology augments, it does not replace.</h4></div>
+    <div class="principle"><div class="n">VI.</div><h4>Built for long-term resilience, not short-term extraction.</h4></div>
+  </div>
+</section>
+
+<!-- ============== ECOSYSTEM ============== -->
+<section class="ecosystem" id="ecosystem">
+  <div class="head">
+    <div class="eyebrow">06 · Ecosystem</div>
+    <h2>Infrastructure built for the whole ecosystem to unlock farmer prosperity.</h2>
+  </div>
+  <div class="eco-grid">
+    <div class="eco">
+      <div class="seal-s">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><circle cx="20" cy="14" r="4"/><path d="M12 34c0-6 4-10 8-10s8 4 8 10"/></svg>
+      </div>
+      <div class="tag">Primary</div>
+      <h3>Smallholder Farmers</h3>
+      <ul>
+        <li>Verified insights about their land</li>
+        <li>Market opportunity visibility</li>
+        <li>Financial access enabled by data</li>
+      </ul>
+    </div>
+    <div class="eco">
+      <div class="seal-s">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M6 30h22l4-6h-8v-10H10v10l-4 6z"/><circle cx="12" cy="30" r="2.5"/><circle cx="26" cy="30" r="2.5"/></svg>
+      </div>
+      <div class="tag">Operators</div>
+      <h3>Agri-Entrepreneurs</h3>
+      <ul>
+        <li>Real-time field monitoring</li>
+        <li>Verification &amp; documentation tools</li>
+        <li>Advisory capabilities powered by insights</li>
+      </ul>
+    </div>
+    <div class="eco">
+      <div class="seal-s">
+        <svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><rect x="6" y="18" width="16" height="16" rx="2"/><path d="M14 18v-6a6 6 0 0112 0v6"/></svg>
+      </div>
+      <div class="tag">Partners</div>
+      <h3>Financial Institutions</h3>
+      <ul>
+        <li>Risk reduction through verified data</li>
+        <li>Verified lending intelligence</li>
+        <li>Access to millions of farmers</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CREDIBILITY ============== -->
+<section class="cred">
+  <div class="head">
+    <div>
+      <div class="eyebrow">07 · Credibility</div>
+      <h2>Founded by organizations that know the problem firsthand.</h2>
+    </div>
+    <p>5am.earth is incubated as a neutral foundation — governed by, and accountable to, the coalition that built the original field programs, identity infrastructure and satellite pipelines over the last decade.</p>
+  </div>
+  <div class="cred-grid">
+    <div class="cred-cell">
+      <div class="logo"><span class="mini"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 4c-2 3-4 4-4 7a4 4 0 008 0c0-3-2-4-4-7z"/></svg></span>Syngenta&nbsp;Fdn.</div>
+      <h4>Scalable AE model</h4>
+      <p>Built the original agri-entrepreneur field network across South Asia and East Africa.</p>
+    </div>
+    <div class="cred-cell">
+      <div class="logo"><span class="mini"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l6 6 6-6-6-6z"/></svg></span>Cardano&nbsp;Fdn.</div>
+      <h4>Identity infrastructure</h4>
+      <p>Contributed the decentralized identity layer that enforces farmer data sovereignty.</p>
+    </div>
+    <div class="cred-cell">
+      <div class="logo"><span class="mini"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="M10 4v12M4 10h12"/></svg></span>Pond&nbsp;Foundation</div>
+      <h4>Sustainability leadership</h4>
+      <p>Long-horizon stewardship mandate and capital for patient, non-extractive growth.</p>
+    </div>
+    <div class="cred-cell">
+      <div class="logo"><span class="mini"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h12v10H4z"/><path d="M4 10h12"/></svg></span>World Food&nbsp;Prog.</div>
+      <h4>Field implementation</h4>
+      <p>Global logistics, rural last-mile coverage and government-level programme access.</p>
+    </div>
+    <div class="cred-cell">
+      <div class="logo"><span class="mini"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="3"/><circle cx="10" cy="10" r="7"/></svg></span>Gamma&nbsp;Earth</div>
+      <h4>Satellite intelligence</h4>
+      <p>Multi-spectral imagery at plot-level resolution, synced to the intelligence layer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PARTNERS CTA ============== -->
+<section class="partners" id="partners">
+  <div>
+    <div class="eyebrow">08 · Partners</div>
+    <h2>The right partners, not the most partners.</h2>
+    <div class="types">
+      <div class="type"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="10"/></svg>Financial · lenders &amp; insurers</div>
+      <div class="type"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/></svg>Data · satellite &amp; AEs</div>
+      <div class="type"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l6-6 6 6-6 6z"/></svg>Technology &amp; infrastructure</div>
+      <div class="type"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h14M6 13l4-4 4 4"/></svg>Implementation &amp; field ops</div>
+    </div>
+  </div>
+  <div class="cta-big">
+    <div class="eyebrow" style="margin:0;">Get involved</div>
+    <h4>Start a conversation about building the insights infrastructure for farmer prosperity.</h4>
+    <p>We take on a limited number of implementation and technology partners each year. Write to us with a one-page brief; we reply within 14 days.</p>
+    <button class="btn ink" onclick="document.getElementById('reg-modal').classList.add('open')">Start a conversation
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M10 4l4 4-4 4"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ============== ICON GRID ============== -->
+<section class="icongrid" id="system" hidden>
+  <div class="head">
+    <div>
+      <div class="eyebrow">09 · Visual system</div>
+      <h2>A pictographic system for the field.</h2>
+    </div>
+    <p class="note">Eighteen hand-drawn pictograms describe every object and action in the loop — field, farmer, crop, market, credit, satellite, verification. They sit inline with type on farmer-facing surfaces.</p>
+  </div>
+  <div class="icons">
+    <!-- 18 icons -->
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="6"/><path d="M20 4v4M20 32v4M4 20h4M32 20h4M8 8l3 3M29 29l3 3M32 8l-3 3M11 29l-3 3"/></svg><span class="lbl">Satellite</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M6 30h22l4-6h-8v-10H10v10l-4 6z"/><circle cx="12" cy="30" r="2.5"/><circle cx="26" cy="30" r="2.5"/></svg><span class="lbl">Logistics</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><circle cx="20" cy="20" r="8"/><path d="M20 14v6l4 2"/><path d="M12 32l4-4M28 32l-4-4"/></svg><span class="lbl">Verified</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 14l12-6 12 6v16l-12 6-12-6zM8 14l12 6 12-6M20 20v16"/></svg><span class="lbl">Record</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M20 6c-4 6-8 8-8 14a8 8 0 0016 0c0-6-4-8-8-14z"/><path d="M20 20v10"/></svg><span class="lbl">Water</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M20 32V18M20 18c-6 0-10-4-10-10 6 0 10 4 10 10zM20 18c6 0 10-4 10-10-6 0-10 4-10 10z"/></svg><span class="lbl">Growth</span></div>
+
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M6 20a14 14 0 1128 0"/><path d="M14 20l-4 4 4 4M26 20l4 4-4 4"/></svg><span class="lbl">Loop</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 16h24v14H8z"/><path d="M8 16l4-6h16l4 6M16 16v14M24 16v14"/></svg><span class="lbl">Market</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><circle cx="20" cy="14" r="4"/><path d="M12 34c0-6 4-10 8-10s8 4 8 10"/><path d="M20 6v4"/></svg><span class="lbl">Farmer</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><circle cx="14" cy="14" r="4"/><circle cx="26" cy="14" r="4"/><path d="M6 32c0-4 4-8 8-8s8 4 8 8M18 32c0-4 4-8 8-8s8 4 8 8"/></svg><span class="lbl">Community</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 20l12-12 12 12v14H8z"/><path d="M16 34V24h8v10"/></svg><span class="lbl">Farm</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M6 22h28l-4 10H10l-4-10z"/><path d="M10 22V14a10 10 0 0120 0v8"/></svg><span class="lbl">Harvest</span></div>
+
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M16 6v24l-4 4M24 6v24l4 4M10 18h20"/></svg><span class="lbl">Produce</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M20 34V14M20 14c-4-4-10-4-10 0 0 6 6 6 10 0zM20 14c4-4 10-4 10 0 0 6-6 6-10 0z"/></svg><span class="lbl">Plant</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M20 8c-6 4-10 8-10 14a10 10 0 0020 0c0-6-4-10-10-14z"/><path d="M20 8v-2"/></svg><span class="lbl">Seed</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M14 34V18a6 6 0 0112 0v16M20 18V10"/><path d="M10 34h20"/></svg><span class="lbl">Tree</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M8 6v28M12 6v28M28 6v28M32 6v28M20 10v20"/><circle cx="20" cy="10" r="2"/></svg><span class="lbl">Tools</span></div>
+    <div class="cell"><svg viewBox="0 0 40 40" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><rect x="8" y="10" width="24" height="22" rx="2"/><path d="M14 10V6M26 10V6M8 16h24M14 22h4M22 22h4"/></svg><span class="lbl">Schedule</span></div>
+  </div>
+</section>
+
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <div class="foot-mark">
+        <img src="logo.png" alt="5am.Earth">
+      </div>
+      <p class="foot-desc">Hidden insights. Real wealth. A neutral foundation for verified agricultural intelligence — built to last decades, not quarters.</p>
+      <a class="foot-email" href="mailto:hello@5am.earth">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 7l8 5 8-5"/></svg>
+        hello@5am.earth
+      </a>
+    </div>
+    <!-- Platform, Company, Resources columns hidden -->
+  </div>
+
+  <div class="foot-giant">5am.earth —</div>
+
+  <div class="foot-bottom">
+    <div>© 2026 5am.earth Foundation</div>
+    <div>Since 5am · EN / VI / FR / PT</div>
+  </div>
+</footer>
+
+<!-- ============== REGISTRATION MODAL ============== -->
+<div class="modal-backdrop" id="reg-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reg-title">
+    <button class="close" onclick="document.getElementById('reg-modal').classList.remove('open')" aria-label="Close">×</button>
+    <div class="m-eyebrow">Start a conversation</div>
+    <h3 id="reg-title">Get involved with the Foundation</h3>
+
+    <label>I'm reaching out as</label>
+    <div class="pills" id="reg-pills">
+      <button type="button" class="pill active">For Institutions</button>
+      <button type="button" class="pill">For Data Contributors</button>
+      <button type="button" class="pill">For Funders</button>
+      <button type="button" class="pill">Other Inquiry</button>
+    </div>
+
+    <form id="contact-form">
+      <label>Name</label>
+      <input id="cf-name" type="text" placeholder="Your name" required>
+
+      <label>Organization</label>
+      <input id="cf-org" type="text" placeholder="Your organization">
+
+      <label>Email</label>
+      <input id="cf-email" type="email" placeholder="you@organization.org" required>
+
+      <label>Message</label>
+      <textarea id="cf-message" placeholder="Brief description of your interest..."></textarea>
+
+      <!-- Honeypot: hidden from humans, bots fill it in. Submissions with this set are dropped. -->
+      <input id="cf-website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" />
+
+      <button type="submit" class="submit" id="cf-submit">Send message →</button>
+      <p class="m-foot" id="cf-status">We respond to qualified inquiries within 5 business days.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Pill toggle
+  document.querySelectorAll('#reg-pills .pill').forEach(p => {
+    p.addEventListener('click', () => {
+      document.querySelectorAll('#reg-pills .pill').forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+    });
+  });
+
+  // ESC to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('reg-modal').classList.remove('open');
+  });
+
+  // Endpoint: Google Apps Script web app. It holds NO secret — it only knows how
+  // to email a fixed recipient, so it is safe for this URL to be public.
+  const CONTACT_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzIDQm_lpcfvms-GzhS87IMhG2Flz4adI2g2auOZ8gwQUw-tCICRKs2IG3mY0yWRHbnbw/exec';
+
+  // Used for a simple "submitted too fast = bot" check on the server.
+  const formRenderedAt = Date.now();
+
+  // Contact form submit
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cf-submit');
+    const status = document.getElementById('cf-status');
+    const role = (document.querySelector('#reg-pills .pill.active') || {}).textContent || '';
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+
+    try {
+      // text/plain keeps this a CORS "simple request" so the browser sends it to
+      // Apps Script without a preflight (Apps Script doesn't return CORS headers).
+      await fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          role: role,
+          name: document.getElementById('cf-name').value,
+          organization: document.getElementById('cf-org').value,
+          email: document.getElementById('cf-email').value,
+          message: document.getElementById('cf-message').value,
+          website: document.getElementById('cf-website').value, // honeypot
+          elapsedMs: Date.now() - formRenderedAt
+        })
+      });
+
+      // no-cors gives an opaque response we can't read; a resolved fetch means it
+      // was delivered to Apps Script, which validates and emails server-side.
+      status.textContent = "Message sent! We'll be in touch within 5 business days.";
+      this.reset();
+      setTimeout(() => document.getElementById('reg-modal').classList.remove('open'), 2000);
+    } catch {
+      status.textContent = 'Network error. Please try again.';
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Send message →';
+  });
+</script>
+
+<!-- ============== TWEAKS ============== -->
+<div class="tweaks" id="tweaks">
+  <h6>Tweaks</h6>
+  <div class="row">
+    <label>Hero palette</label>
+    <div class="swatches" id="hueSw">
+      <div class="sw active" data-hue="green" style="background:#009a3d"></div>
+      <div class="sw" data-hue="pink" style="background:#f5c9d6"></div>
+      <div class="sw" data-hue="ink" style="background:#111"></div>
+      <div class="sw" data-hue="earth" style="background:#8a5a2b"></div>
+    </div>
+  </div>
+  <div class="row">
+    <label>Density</label>
+    <div class="swatches" id="denSw">
+      <div class="sw active" data-den="spacious" style="background:#fff;color:#111;font-size:10px;display:grid;place-items:center;">S</div>
+      <div class="sw" data-den="tight" style="background:#fff;color:#111;font-size:10px;display:grid;place-items:center;">T</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  let state = Object.assign({hue:'green', density:'spacious'}, window.TWEAK_DEFAULTS || {});
+
+  const hues = {
+    green: { bg:'#009a3d', fg:'#ffffff' },
+    pink:  { bg:'#f5c9d6', fg:'#111111' },
+    ink:   { bg:'#111111', fg:'#ffffff' },
+    earth: { bg:'#8a5a2b', fg:'#ffffff' }
+  };
+
+  function apply(){
+    const h = hues[state.hue] || hues.green;
+    document.querySelectorAll('.hero, .statement, .principles').forEach(el => {
+      el.style.background = h.bg; el.style.color = h.fg;
+    });
+
+    document.querySelectorAll('.btn.solid').forEach(el=>{ el.style.color = h.bg; });
+    // density
+    document.documentElement.style.setProperty('--pad', state.density==='tight' ? '80px' : '140px');
+  }
+
+  // Tweak mode messaging
+  let panel = document.getElementById('tweaks');
+  window.addEventListener('message', (e)=>{
+    const d = e.data || {};
+    if(d.type === '__activate_edit_mode') panel.classList.add('open');
+    if(d.type === '__deactivate_edit_mode') panel.classList.remove('open');
+  });
+  // Announce availability
+  try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e){}
+
+  document.getElementById('hueSw').addEventListener('click', (e)=>{
+    const sw = e.target.closest('.sw'); if(!sw) return;
+    document.querySelectorAll('#hueSw .sw').forEach(s=>s.classList.remove('active'));
+    sw.classList.add('active');
+    state.hue = sw.dataset.hue;
+    apply();
+    try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{hue: state.hue}}, '*'); } catch(e){}
+  });
+  document.getElementById('denSw').addEventListener('click', (e)=>{
+    const sw = e.target.closest('.sw'); if(!sw) return;
+    document.querySelectorAll('#denSw .sw').forEach(s=>s.classList.remove('active'));
+    sw.classList.add('active');
+    state.density = sw.dataset.den;
+    apply();
+    try { window.parent.postMessage({type:'__edit_mode_set_keys', edits:{density: state.density}}, '*'); } catch(e){}
+  });
+
+  // Set initial active states from defaults
+  document.querySelectorAll('#hueSw .sw').forEach(s=>s.classList.toggle('active', s.dataset.hue===state.hue));
+  document.querySelectorAll('#denSw .sw').forEach(s=>s.classList.toggle('active', s.dataset.den===state.density));
+
+  apply();
+
+  // Nav scroll: transparent over hero, solid after
+  const nav = document.querySelector('.nav');
+  const navLeft = document.querySelector('.nav-left');
+  const hero = document.querySelector('.hero');
+  function onScroll() {
+    const heroH = hero ? hero.offsetHeight : window.innerHeight;
+    const past = window.scrollY > heroH * 0.25;
+    nav.classList.toggle('scrolled', past);
+    navLeft.classList.toggle('show', past);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 5am country indicator — show whichever country/region is currently at 5am
+  (function fiveAmCountry() {
+    const MAP = {
+      '-12': 'Baker Island', '-11': 'American Samoa', '-10': 'Hawaiʻi',
+      '-9': 'Alaska', '-8': 'California', '-7': 'Colorado',
+      '-6': 'Mexico City', '-5': 'Colombia', '-4': 'Bolivia',
+      '-3': 'São Paulo', '-2': 'South Georgia', '-1': 'Cape Verde',
+      '0': 'Ghana', '1': 'Nigeria', '2': 'Kenya',
+      '3': 'Tanzania', '4': 'UAE', '5': 'Pakistan',
+      '5.5': 'India', '6': 'Bangladesh', '6.5': 'Myanmar',
+      '7': 'Thailand', '8': 'Philippines', '9': 'Japan',
+      '10': 'Sydney', '11': 'Solomon Islands', '12': 'New Zealand',
+      '13': 'Samoa', '14': 'Kiribati'
+    };
+    function get5amCountry() {
+      const now = new Date();
+      const utcH = now.getUTCHours();
+      const utcM = now.getUTCMinutes();
+      // UTC offset where local clock shows 05:xx
+      let offset = 5 - utcH - utcM / 60;
+      if (offset < -12) offset += 24;
+      if (offset > 14)  offset -= 24;
+      // Try exact half-hour slots first, then round
+      const half = Math.round(offset * 2) / 2;
+      return MAP[String(half)] || MAP[String(Math.round(offset))] || 'Earth';
+    }
+    const label = document.getElementById('fiveam-label');
+    function update() { if (label) label.textContent = get5amCountry(); }
+    update();
+    // Refresh every minute so it follows the sun
+    setInterval(update, 60000);
+  })();
+
+  // --- Vertical Cut Reveal: split text into chars, stagger translateY ---
+  function buildVCR(root) {
+    const inner = root.querySelector('[data-text]');
+    const text = inner ? inner.getAttribute('data-text') : (root.getAttribute('data-text') || root.textContent || '');
+    const stagger = parseFloat(root.dataset.stagger || '0.04');
+    const delay = parseFloat(root.dataset.delay || '0');
+    root.setAttribute('aria-label', text);
+    // Build: split by words; each word in .w (overflow hidden); each char in .c
+    const frag = document.createDocumentFragment();
+    const words = text.split(' ');
+    let globalIdx = 0;
+    words.forEach((word, wi) => {
+      const wEl = document.createElement('span');
+      wEl.className = 'w';
+      // Intl.Segmenter for graphemes
+      let chars;
+      if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+        const seg = new Intl.Segmenter('en', { granularity: 'grapheme' });
+        chars = Array.from(seg.segment(word), s => s.segment);
+      } else {
+        chars = Array.from(word);
+      }
+      chars.forEach((ch) => {
+        const cEl = document.createElement('span');
+        cEl.className = 'c';
+        cEl.textContent = ch;
+      cEl.style.animationDelay = (delay + globalIdx * stagger) + 's';
+        wEl.appendChild(cEl);
+        globalIdx++;
+      });
+      frag.appendChild(wEl);
+      if (wi < words.length - 1) {
+        const sp = document.createElement('span');
+        sp.className = 'sp';
+        sp.setAttribute('aria-hidden', 'true');
+        frag.appendChild(sp);
+      }
+    });
+    inner?.remove();
+    root.textContent = '';
+    root.appendChild(frag);
+  }
+  document.querySelectorAll('[data-vcr]').forEach(buildVCR);
+  // Trigger on next tick for non-scroll ones
+  setTimeout(() => {
+    document.querySelectorAll('[data-vcr]:not([data-vcr-scroll])').forEach(el => el.classList.add('in'));
+  }, 50);
+  // Scroll-triggered vcr (once in view)
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    document.querySelectorAll('[data-vcr-scroll]').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('[data-vcr-scroll]').forEach(el => el.classList.add('in'));
+  }
+})();
+</script>
+
+</body>
+</html>
