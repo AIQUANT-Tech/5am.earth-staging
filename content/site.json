@@ -1,0 +1,855 @@
+{
+  "typography": {
+    "headline": {
+      "family": "Manrope",
+      "size": 92,
+      "letterSpacing": -35,
+      "lineHeight": 98
+    },
+    "number": {
+      "family": "Manrope",
+      "size": 46,
+      "letterSpacing": -30,
+      "lineHeight": 100
+    },
+    "body": {
+      "family": "Manrope",
+      "size": 17,
+      "letterSpacing": 0,
+      "lineHeight": 150
+    },
+    "caption": {
+      "family": "Manrope",
+      "size": 11,
+      "letterSpacing": 160,
+      "lineHeight": 140
+    }
+  },
+  "sections": [
+    {
+      "id": "home-hero",
+      "page": "home",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "#e7e0d8",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Secure, open agricultural data ecosystem",
+        "h1": "Grow trust.\nCreate opportunity.",
+        "sub1": "5am.earth makes verified farmer and field data reusable across the agricultural value chain. \nMake every farmer and every verified contribution count.",
+        "sub2": "",
+        "cta1": "Explore a partnership",
+        "cta2": "See the data"
+      },
+      "image": {
+        "src": "/collage/hero-hands.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "home-network",
+      "page": "home",
+      "label": "Network today + pilot",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "The network today",
+        "h2": "Start with people already in the field.",
+        "intro": "The Syngenta Foundation Agri-Entrepreneur program already connects local entrepreneurs with farmers across India. 5am.earth is building the verification layer on that working network.",
+        "stat1n": "2.4M+",
+        "stat1l": "smallholder farmers connected through the program",
+        "stat2n": "21K+",
+        "stat2l": "trained Agri-Entrepreneurs in the established network",
+        "stat3n": "45%",
+        "stat3l": "of connected farmers are women",
+        "stat4n": "52%",
+        "stat4l": "of Agri-Entrepreneurs were women in 2024",
+        "sourceNote": "Source: Earth Observation and Blockchain Integration research report. Network figures refer to the Syngenta Foundation Agri-Entrepreneur program in India.",
+        "pilotEyebrow": "Planned initial deployment",
+        "pilotH3": "The next step is measured, not assumed.",
+        "pilot1n": "1,000",
+        "pilot1l": "Agri-Entrepreneurs",
+        "pilot2n": "100,000",
+        "pilot2l": "farmers",
+        "pilot3n": "2",
+        "pilot3l": "initial oracle use cases"
+      }
+    },
+    {
+      "id": "home-verify",
+      "page": "home",
+      "label": "How a record earns trust",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "How a record earns trust",
+        "h2": "A claim is useful only if others can check it.",
+        "lede": "Local field knowledge establishes what happened. Satellite evidence checks the place and its history. Consent determines where the record can go next.",
+        "cta": "See how verification works"
+      },
+      "image": {
+        "src": "/collage/verification-stack-ink.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "home-users",
+      "page": "home",
+      "label": "Audiences intro + cards",
+      "order": 3,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "One foundation, many users",
+        "h2": "Start with the value you need.",
+        "intro": "One verified record can answer different questions. Choose the decision you need to make.",
+        "a1t": "Financial institutions",
+        "a1b": "Assess a field using evidence that can be checked at its source, then reused at the next decision.",
+        "a1cta": "Explore finance use cases",
+        "a2t": "Buyers and supply chains",
+        "a2b": "See where produce came from and which farmer and field records support the claim.",
+        "a2cta": "Explore market use cases",
+        "a3t": "Governments and NGOs",
+        "a3b": "Track who a program reaches and what changes in the field without rebuilding the record each time.",
+        "a3cta": "Explore program use cases",
+        "a4t": "Builders and researchers",
+        "a4b": "Build products and models on agricultural records shared with permission.",
+        "a4cta": "Build with 5am.earth",
+        "a5t": "Agri-Entrepreneurs",
+        "a5b": "Turn fieldwork into a verified contribution that strengthens the next service you provide.",
+        "a5cta": "Join the field network",
+        "a6t": "Farmers",
+        "a6b": "Keep one portable farmer and field record for the services you choose to access.",
+        "a6cta": "See the farmer benefit"
+      }
+    },
+    {
+      "id": "home-outcome",
+      "page": "home",
+      "label": "Farmer outcome",
+      "order": 4,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "The farmer-centered outcome",
+        "h2": "The record stays useful after the first check.",
+        "lede": "A farmer can give the next lender, buyer or service provider access to the same verified record instead of starting again.",
+        "o1": "Portable farmer and field identity",
+        "o2": "Reduced repeated verification",
+        "o3": "Stronger visibility for lenders and buyers",
+        "o4": "Recognition for verified contributions"
+      }
+    },
+    {
+      "id": "home-case",
+      "page": "home",
+      "label": "Featured use case",
+      "order": 5,
+      "style": {
+        "bg": "#fcc6cc",
+        "textColor": "",
+        "padding": "contained",
+        "rounded": true,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Featured use case",
+        "h2": "Satellite Oracle for smallholder agriculture.",
+        "body": "The first use case combines local field records with satellite evidence. Cardano records the source and history of each verification.",
+        "m1t": "Use case 01",
+        "m1b": "Land border verification",
+        "m2t": "Use case 02",
+        "m2b": "Historical sustainability rating",
+        "m3t": "Goal",
+        "m3b": "Lower risk and expand financial inclusion",
+        "cta": "Read the case study"
+      },
+      "image": {
+        "src": "/uploads/1788351715639-pink-collage.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "home-partners",
+      "page": "home",
+      "label": "Partners",
+      "order": 6,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Our partners",
+        "h2": "No single partner can verify the whole picture.",
+        "intro": "Syngenta Foundation India brings the field network. Technical partners contribute satellite checks, training and the record infrastructure.",
+        "cta": "Meet our partners"
+      }
+    },
+    {
+      "id": "home-lead",
+      "page": "home",
+      "label": "Lead form CTA",
+      "order": 7,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Build the next use case",
+        "h2": "Which decision needs better field evidence?",
+        "body": "Tell us what you need to decide and what evidence you have today. We will map the missing checks and the right partners.",
+        "cta": "Start the conversation"
+      }
+    },
+    {
+      "id": "process-hero",
+      "page": "process",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "#e9e2d8",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "The Process",
+        "h1": "One field record. Four checks before it travels.",
+        "body": "5am.earth connects local evidence with satellite checks, consent and a traceable record of origin."
+      },
+      "image": {
+        "src": "/uploads/1788435655209-teaminground.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "process-stages",
+      "page": "process",
+      "label": "Four stage cards + infographic",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "s1t": "Capture",
+        "s1b": "An Agri-Entrepreneur records the farmer, field and activity where the work happens.",
+        "s2t": "Validate",
+        "s2b": "Satellite imagery checks field boundaries against current signals and land history.",
+        "s3t": "Authenticate",
+        "s3b": "Identity and consent are attached to the evidence. Its source can now be traced.",
+        "s4t": "Reuse",
+        "s4b": "The farmer can permit the same record to support another service or decision."
+      },
+      "image": {
+        "src": "/collage/verification-stack-bone.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "process-why",
+      "page": "process",
+      "label": "Why different",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Why this is different",
+        "h2": "Verify the evidence once. Keep its history.",
+        "o1": "Fewer repeated field checks",
+        "o2": "Clearer confidence and provenance",
+        "o3": "Portable records for farmers",
+        "o4": "Reusable evidence for organizations"
+      }
+    },
+    {
+      "id": "process-cta",
+      "page": "process",
+      "label": "Final CTA",
+      "order": 3,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Apply the process",
+        "h2": "Show us the decision you cannot verify today.",
+        "cta": "Discuss your use case"
+      }
+    },
+    {
+      "id": "usecases-hero",
+      "page": "use-cases",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Use Cases",
+        "h1": "Start with the decision. Trace it back to the field.",
+        "body": "Each use case begins with evidence that has a source, a history and clear permission to be used."
+      },
+      "image": {
+        "src": "/uploads/1788346191229-ChatGPT-Image-Sep-2--2026--04_37_47-PM--.png",
+        "scale": 92
+      }
+    },
+    {
+      "id": "usecases-evidence",
+      "page": "use-cases",
+      "label": "Evidence today",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Evidence already in the field",
+        "h2": "The field network exists today.",
+        "intro": "The Syngenta Foundation Agri-Entrepreneur program supplies the relationships on the ground. The first 5am.earth deployment is planned on top of that network.",
+        "stat1n": "2.4M+",
+        "stat1l": "smallholder farmers connected across India",
+        "stat2n": "21K+",
+        "stat2l": "trained Agri-Entrepreneurs",
+        "stat3n": "13",
+        "stat3l": "Indian states reached by the program",
+        "stat4n": "100K",
+        "stat4l": "farmers planned for the initial deployment",
+        "sourceNote": "Evidence: Syngenta Foundation India program information and the Earth Observation and Blockchain Integration research report. Deployment figures describe the initial planned implementation.",
+        "photo1cap": "Human field evidence",
+        "photo1body": "Local training and trusted Agri-Entrepreneur relationships ground every record.",
+        "photo2cap": "Earth observation evidence",
+        "photo2body": "Satellite imagery helps validate field boundaries and historical land signals."
+      },
+      "image": {
+        "src": "/collage/use-case-farmer.png",
+        "scale": 100
+      },
+      "image2": {
+        "src": "/collage/network-satellite.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "usecases-apps",
+      "page": "use-cases",
+      "label": "Applications grid intro",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Applications",
+        "h2": "Six decisions. One source of evidence.",
+        "intro": "The record stays consistent. What changes is the question each organization asks of it."
+      }
+    },
+    {
+      "id": "usecases-implementation",
+      "page": "use-cases",
+      "label": "Initial implementation",
+      "order": 3,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Initial implementation",
+        "h2": "Satellite Oracle for smallholder agriculture.",
+        "body": "The first implementation focuses on turning two evidence types into reusable, verifiable records.",
+        "m1t": "Land",
+        "m1b": "Verified field boundaries",
+        "m2t": "History",
+        "m2b": "Sustainability evidence",
+        "m3t": "Services",
+        "m3b": "Finance, insurance, advisory, and markets"
+      }
+    },
+    {
+      "id": "usecases-cta",
+      "page": "use-cases",
+      "label": "Final CTA",
+      "order": 4,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Develop the next use case",
+        "h2": "Which decision needs evidence from the field?",
+        "cta": "Discuss your use case"
+      }
+    },
+    {
+      "id": "partners-hero",
+      "page": "partners",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "#e7e0d6",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Our Partners",
+        "h1": "Shared expertise creates shared value.",
+        "body": "5am.earth brings together field networks, verification technology, infrastructure, and service providers. Every participant contributes something distinct and receives practical value."
+      },
+      "image": {
+        "src": "/collage/network-map.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "partners-infographic",
+      "page": "partners",
+      "label": "Partnership photo",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {},
+      "image": {
+        "src": "/collage/partners-pair.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "partners-value",
+      "page": "partners",
+      "label": "Value for every participant",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Value for every participant",
+        "h2": "Why join the ecosystem?",
+        "intro": "Partnership is not a logo wall. It is a practical exchange of reach, evidence, infrastructure, capability, and opportunity."
+      }
+    },
+    {
+      "id": "partners-cta",
+      "page": "partners",
+      "label": "Final CTA",
+      "order": 3,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Become a partner",
+        "h2": "Bring your network, capability, or use case.",
+        "cta": "Contact us"
+      }
+    },
+    {
+      "id": "team-hero",
+      "page": "team",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Company Team",
+        "h1": "Built by people who connect fields, data, and opportunity.",
+        "body": "5am.earth combines agricultural experience, field delivery, product thinking, Earth observation, and decentralized infrastructure."
+      },
+      "image": {
+        "src": "/uploads/1788355255790-fliped.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "team-structure",
+      "page": "team",
+      "label": "Team structure intro",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Team structure",
+        "h2": "The capabilities behind the platform.",
+        "intro": "Replace these role groups with approved team names, titles, portraits, and biographies before launch."
+      }
+    },
+    {
+      "id": "team-cta",
+      "page": "team",
+      "label": "Final CTA",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Connect with the team",
+        "h2": "Let’s explore what we can build together.",
+        "cta": "Contact us"
+      }
+    },
+    {
+      "id": "contact-hero",
+      "page": "contact",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "#028a36",
+        "textColor": "#ffffff",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Contact 5am.earth",
+        "h1": "Let’s grow trust together.",
+        "body": "Tell us what you are trying to build, verify, fund, source, or understand. We will connect you with the right route."
+      },
+      "image": {
+        "src": "/uploads/1788352110248-ChatGPT-Image-Sep-2--2026--07_28_01-PM.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "contact-form",
+      "page": "contact",
+      "label": "Form panel",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "How can we work together?",
+        "o1": "Access verified agricultural data",
+        "o2": "Build a product or service",
+        "o3": "Contribute field or satellite data",
+        "o4": "Fund or partner with the ecosystem"
+      }
+    },
+    {
+      "id": "casestudies-hero",
+      "page": "case-studies",
+      "label": "Hero",
+      "order": 0,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Case studies",
+        "h1": "Trust, tested in the field.",
+        "body": "How field evidence, Earth observation, and secure provenance become practical infrastructure for agricultural services."
+      },
+      "image": {
+        "src": "/collage/finance-grid.png",
+        "scale": 100
+      }
+    },
+    {
+      "id": "casestudies-story",
+      "page": "case-studies",
+      "label": "Story + stats + quote",
+      "order": 1,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "India / initial deployment",
+        "h2": "Satellite Oracle for smallholder agriculture.",
+        "intro": "A collaboration designed around the Syngenta Foundation Agri-Entrepreneur program and its existing farmer relationships.",
+        "stat1n": "2.4M+",
+        "stat1l": "farmers in the established network",
+        "stat2n": "21K+",
+        "stat2l": "trained Agri-Entrepreneurs",
+        "stat3n": "100K",
+        "stat3l": "farmers in the planned initial deployment",
+        "s1t": "The challenge",
+        "s1b": "Farmer and field evidence is repeatedly collected, difficult to reuse, and often disconnected from financial and market services.",
+        "s2t": "The system",
+        "s2b": "Agri-Entrepreneurs capture field information. Satellite data validates boundaries and land signals. Cardano infrastructure records verifiable provenance.",
+        "s3t": "The first use cases",
+        "s3b": "Blockchain-verified land border records and historical sustainability ratings create reusable evidence for services and decisions.",
+        "s4t": "The intended value",
+        "s4b": "Lower risk for financial partners, better service delivery, and new pathways to finance, insurance, markets, and advisory support.",
+        "quote": "Verified once. Reused across the next service, decision, and opportunity."
+      }
+    },
+    {
+      "id": "casestudies-cta",
+      "page": "case-studies",
+      "label": "Final CTA",
+      "order": 2,
+      "style": {
+        "bg": "",
+        "textColor": "",
+        "padding": "full",
+        "rounded": false,
+        "marginY": 0,
+        "visible": true
+      },
+      "content": {
+        "eyebrow": "Develop a case study with us",
+        "h2": "Bring your use case to the shared trust layer.",
+        "cta": "Start a conversation"
+      }
+    }
+  ],
+  "useCases": [
+    {
+      "id": "uc1",
+      "order": 0,
+      "title": "Finance and insurance",
+      "body": "Check a field boundary and its history before pricing risk or extending a service."
+    },
+    {
+      "id": "uc2",
+      "order": 1,
+      "title": "Markets and procurement",
+      "body": "Trace a sourcing claim back to the farmer and field evidence behind it."
+    },
+    {
+      "id": "uc3",
+      "order": 2,
+      "title": "Farmer services",
+      "body": "Use field history and crop signals to decide what support is needed now."
+    },
+    {
+      "id": "uc4",
+      "order": 3,
+      "title": "Sustainability",
+      "body": "Compare current claims with historical satellite evidence and recorded fieldwork."
+    },
+    {
+      "id": "uc5",
+      "order": 4,
+      "title": "Programs and policy",
+      "body": "See who a program reaches and measure change against consistent records."
+    },
+    {
+      "id": "uc6",
+      "order": 5,
+      "title": "Products and research",
+      "body": "Build a product on permissioned records without collecting the same evidence again."
+    },
+    {
+      "id": "ucod7xs5k",
+      "title": "Carbon & climate finance",
+      "body": "Verify practice changes on the ground before issuing or trading a carbon credit.",
+      "order": 6
+    }
+  ],
+  "team": [
+    {
+      "id": "tm1",
+      "order": 0,
+      "name": "Foundation leadership",
+      "role": "Stewardship & governance",
+      "bio": "Stewardship, governance, partnerships, and long-term mission.",
+      "photo": ""
+    },
+    {
+      "id": "tm2",
+      "order": 1,
+      "name": "Product and data",
+      "role": "Product & data",
+      "bio": "Farmer-centered products, interoperable data models, and decision-ready intelligence.",
+      "photo": ""
+    },
+    {
+      "id": "tm3",
+      "order": 2,
+      "name": "Field and program",
+      "role": "Field & program",
+      "bio": "Agri-Entrepreneur enablement, farmer relationships, training, and local delivery.",
+      "photo": ""
+    },
+    {
+      "id": "tm4",
+      "order": 3,
+      "name": "Technology and verification",
+      "role": "Technology & verification",
+      "bio": "Earth observation, secure provenance, identity, and platform infrastructure.",
+      "photo": ""
+    },
+    {
+      "id": "tmmamfi9m",
+      "name": "Anaya Kapoor",
+      "role": "Head of Field Operations",
+      "bio": "Leads Agri-Entrepreneur enablement and farmer relationships across the India network.",
+      "photo": "",
+      "order": 4
+    }
+  ],
+  "pages": [
+    {
+      "id": "home",
+      "label": "Home",
+      "href": "/",
+      "navVisible": true
+    },
+    {
+      "id": "process",
+      "label": "The Process",
+      "href": "/process",
+      "navVisible": true
+    },
+    {
+      "id": "use-cases",
+      "label": "Use Cases",
+      "href": "/use-cases",
+      "navVisible": true
+    },
+    {
+      "id": "partners",
+      "label": "Our Partners",
+      "href": "/partners",
+      "navVisible": true
+    },
+    {
+      "id": "team",
+      "label": "Company Team",
+      "href": "/team",
+      "navVisible": true
+    },
+    {
+      "id": "contact",
+      "label": "Contact us",
+      "href": "/contact",
+      "navVisible": true
+    },
+    {
+      "id": "case-studies",
+      "label": "Case Studies",
+      "href": "/case-studies",
+      "navVisible": false
+    }
+  ]
+}
