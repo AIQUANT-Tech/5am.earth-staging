@@ -103,9 +103,11 @@ p { margin: 0; }
   font-weight: 700;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms cubic-bezier(.22,.61,.36,1), box-shadow 180ms ease;
   white-space: nowrap;
 }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px rgba(17,17,17,0.28); }
+.btn:active { transform: translateY(0); box-shadow: none; }
 .btn-green { background: var(--c-green); color: #fff; }
 .btn-green:hover { background: var(--c-green-deep); }
 .btn-ink { background: var(--c-ink); color: #fff; }
@@ -118,7 +120,7 @@ p { margin: 0; }
 /* ---------- header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(239,236,230,0.88);
+  background: var(--header-bg, #EAE2D7);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--bd);
 }
@@ -194,6 +196,8 @@ section { padding: 100px 0; }
 .hero-support .lede-sub { color: var(--section-text, var(--c-fg-muted)); font-size: 15.5px; max-width: 460px; }
 .hero-actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
 .hero-art { position: relative; }
+.hero-grid.media-left .hero-art,
+.inner-hero-grid.media-left .inner-hero-art { order: -1; }
 .hero-art img { width: 100%; height: auto; border-radius: var(--r-lg); }
 
 /* ---------- stats ---------- */
@@ -290,7 +294,8 @@ section { padding: 100px 0; }
 
 /* ---------- case feature ---------- */
 .case-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: center; }
-.case-grid h2 { font-size: clamp(28px, calc(var(--tp-headline-size, 64px) * 0.7), 64px); line-height: 0.98; letter-spacing: var(--tp-headline-ls, -0.03em); }
+.case-grid.case-grid-reverse { grid-template-columns: 1fr 1.3fr; }
+.case-grid h2 { font-size: clamp(28px, calc(var(--tp-headline-size, 64px) * 0.7), 64px); line-height: 0.98; letter-spacing: var(--tp-headline-ls, -0.03em); margin-bottom: 24px; }
 .case-grid p { font-size: 17px; max-width: 560px; }
 .case-media img { width: 100%; height: auto; border-radius: var(--r-lg); }
 .case-metrics { border-top: 1px solid rgba(17,17,17,0.25); margin-top: 8px; }
@@ -299,11 +304,24 @@ section { padding: 100px 0; }
 .text-link { display: inline-block; margin-top: 28px; font-weight: 700; font-size: 14px; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 
 /* ---------- partners ---------- */
+.partner-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 380px;
+  border-top: 1px solid rgba(17,17,17,0.25);
+}
+.partner-bullets li {
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(17,17,17,0.25);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--section-text, var(--c-fg-muted));
+}
 .partner-logos { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--bd); border-left: 1px solid var(--bd); border-radius: var(--r-lg); overflow: hidden; }
 .partner-logos > div { height: 150px; border-right: 1px solid var(--bd); border-bottom: 1px solid var(--bd); display: flex; align-items: center; justify-content: center; padding: 26px; background: var(--c-paper); }
 .partner-logos img { max-width: 82%; max-height: 78px; object-fit: contain; }
-.cardano-mark { flex-direction: column; font-weight: 800; font-size: 24px; color: #173b68; }
-.cardano-mark small { text-transform: uppercase; font-size: 10px; letter-spacing: 0.16em; font-weight: 700; }
+.partner-textmark { font-weight: 800; font-size: 22px; color: var(--c-ink); text-align: center; letter-spacing: -0.01em; }
 
 /* ---------- lead / cta panel ---------- */
 .lead-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; }
@@ -453,4 +471,127 @@ form.card-form small { font-size: 10.5px; color: #999; }
   .stat-grid, .stat-grid.three, .cell-grid, .cell-grid.cols-4, .cell-grid.cols-2, .partner-logos { grid-template-columns: 1fr; }
   .section-shell { padding: 56px 24px; }
   .quote-block { padding: 32px; }
+}
+
+/* ======================================================================
+   Motion — scroll reveals, hover polish, no layout/palette changes.
+   All entrance animation is gated behind html.js (added by an inline
+   script in <head> before first paint) so content is never hidden for
+   users without JS, and behind prefers-reduced-motion.
+   ====================================================================== */
+
+.cell,
+.stat-cell,
+.team-card,
+.quote-block,
+.pilot-band,
+.partner-logos > div,
+.field-photos figure,
+.section-head,
+.case-media,
+.infographic-figure,
+.outcome-grid > div {
+  --reveal-y: 0px;
+  --hover-y: 0px;
+  --hover-shadow: none;
+  opacity: 1;
+  transform: translateY(calc(var(--reveal-y) + var(--hover-y)));
+  transition:
+    opacity 640ms cubic-bezier(.16,.8,.24,1),
+    transform 320ms cubic-bezier(.22,.61,.36,1),
+    box-shadow 320ms ease;
+  box-shadow: var(--hover-shadow);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .cell:not(.in-view),
+  html.js .stat-cell:not(.in-view),
+  html.js .team-card:not(.in-view),
+  html.js .quote-block:not(.in-view),
+  html.js .pilot-band:not(.in-view),
+  html.js .partner-logos > div:not(.in-view),
+  html.js .field-photos figure:not(.in-view),
+  html.js .section-head:not(.in-view),
+  html.js .case-media:not(.in-view),
+  html.js .infographic-figure:not(.in-view),
+  html.js .outcome-grid > div:not(.in-view) {
+    opacity: 0;
+    --reveal-y: 26px;
+  }
+
+  /* stagger siblings inside grids so cards don't all pop at once */
+  .cell-grid > *:nth-child(1), .stat-grid > *:nth-child(1), .cell-grid.cols-4 > *:nth-child(1),
+  .field-photos > *:nth-child(1), .partner-logos > *:nth-child(1) { transition-delay: 0ms; }
+  .cell-grid > *:nth-child(2), .stat-grid > *:nth-child(2), .cell-grid.cols-4 > *:nth-child(2),
+  .field-photos > *:nth-child(2), .partner-logos > *:nth-child(2) { transition-delay: 80ms; }
+  .cell-grid > *:nth-child(3), .stat-grid > *:nth-child(3), .cell-grid.cols-4 > *:nth-child(3),
+  .partner-logos > *:nth-child(3) { transition-delay: 160ms; }
+  .cell-grid > *:nth-child(4), .stat-grid > *:nth-child(4), .cell-grid.cols-4 > *:nth-child(4) { transition-delay: 240ms; }
+  .cell-grid > *:nth-child(5) { transition-delay: 320ms; }
+  .cell-grid > *:nth-child(6) { transition-delay: 400ms; }
+}
+
+/* hover lift — composes with reveal via separate custom properties so
+   there's no specificity fight between the two states */
+.cell:hover, .team-card:hover, .stat-cell:hover, .partner-logos > div:hover {
+  --hover-y: -4px;
+  --hover-shadow: 0 18px 34px -20px rgba(17,17,17,0.22);
+}
+.team-card:hover .team-portrait { transform: scale(1.035); }
+.team-portrait { transition: transform 420ms cubic-bezier(.22,.61,.36,1); overflow: hidden; }
+.team-portrait img { transition: transform 420ms cubic-bezier(.22,.61,.36,1); }
+
+.header-logo img { transition: transform 320ms cubic-bezier(.34,1.2,.4,1); }
+.header-logo:hover img { transform: rotate(-8deg); }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes modal-pop {
+    from { opacity: 0; transform: translateY(14px) scale(.98); }
+    to { opacity: 1; transform: none; }
+  }
+  .modal-card { animation: modal-pop 260ms cubic-bezier(.16,.8,.24,1); }
+
+  /* Hero entrance — a one-time, CSS-only staggered fade/rise for the text
+     stack plus a scale-in for the collage image. Runs on load (hero is
+     always above the fold), needs no JS, and animation-fill-mode: both
+     keeps each element invisible until its turn so nothing flashes. */
+  @keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes hero-image-in {
+    from { opacity: 0; transform: scale(0.93); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .hero .hero-eyebrow,
+  .hero h1,
+  .hero-support,
+  .hero-actions {
+    animation: hero-fade-up 750ms cubic-bezier(.16,.8,.24,1) both;
+  }
+  .hero .hero-eyebrow { animation-delay: 0ms; }
+  .hero h1 { animation-delay: 100ms; }
+  .hero-support { animation-delay: 260ms; }
+  .hero-actions { animation-delay: 400ms; }
+  .hero-art { animation: hero-image-in 850ms cubic-bezier(.16,.8,.24,1) 180ms both; }
+
+  .inner-hero .eyebrow,
+  .inner-hero h1,
+  .inner-hero p:not(.eyebrow) {
+    animation: hero-fade-up 750ms cubic-bezier(.16,.8,.24,1) both;
+  }
+  .inner-hero .eyebrow { animation-delay: 0ms; }
+  .inner-hero h1 { animation-delay: 100ms; }
+  .inner-hero p:not(.eyebrow) { animation-delay: 260ms; }
+  .inner-hero-art { animation: hero-image-in 850ms cubic-bezier(.16,.8,.24,1) 180ms both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

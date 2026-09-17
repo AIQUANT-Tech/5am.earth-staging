@@ -19,6 +19,7 @@ export interface Typography {
 export interface SectionImage {
   src: string;
   scale: number; // percent width, 100 = full column
+  position?: "left" | "right"; // only meaningful for sections with a side-by-side image + text layout
 }
 
 export interface SectionStyle {
@@ -64,12 +65,39 @@ export interface PageMeta {
   navVisible: boolean;
 }
 
+export interface Partner {
+  id: string;
+  name: string;
+  logo: string; // image path; empty = render name as a text mark
+  order: number;
+  visible: boolean;
+}
+
+export interface Audience {
+  id: string;
+  title: string;
+  body: string;
+  cta: string;
+  order: number;
+  visible: boolean;
+}
+
+export interface SiteSettings {
+  headerBg: string;
+  footerTagline: string;
+  footerCopyright: string;
+  footerMeta: string;
+}
+
 export interface SiteContent {
   typography: Typography;
   pages: PageMeta[];
   sections: Section[];
   useCases: UseCase[];
   team: TeamMember[];
+  partners: Partner[];
+  audiences: Audience[];
+  settings: SiteSettings;
 }
 
 const FILE_PATH = path.join(process.cwd(), "content", "site.json");
@@ -97,7 +125,7 @@ function sec(id: string, page: string, label: string, order: number, content: Re
 }
 
 export function defaultContent(): SiteContent {
-  return {
+  const content: SiteContent = {
     typography: {
       headline: { family: "Manrope", size: 92, letterSpacing: -35, lineHeight: 98 },
       number: { family: "Manrope", size: 46, letterSpacing: -30, lineHeight: 100 },
@@ -118,7 +146,7 @@ export function defaultContent(): SiteContent {
         eyebrow: "Secure, open agricultural data ecosystem",
         h1: "Grow trust.\nCreate opportunity.",
         sub1: "Make every farmer and every verified contribution count.",
-        sub2: "5am.earth makes verified farmer and field data reusable across the agricultural value chain.",
+        sub2: "5am.earth makes verified farmer and field information reusable across the agricultural value chain.",
         cta1: "Explore a partnership",
         cta2: "See the data",
       }, "/collage/hero-hands.png"),
@@ -143,20 +171,14 @@ export function defaultContent(): SiteContent {
         lede: "Local field knowledge establishes what happened. Satellite evidence checks the place and its history. Consent determines where the record can go next.",
         cta: "See how verification works",
       }, "/collage/verification-stack-ink.png"),
-      sec("home-users", "home", "Audiences intro + cards", 3, {
+      sec("home-users", "home", "Audiences intro", 3, {
         eyebrow: "One foundation, many users",
         h2: "Start with the value you need.",
         intro: "One verified record can answer different questions. Choose the decision you need to make.",
-        a1t: "Financial institutions", a1b: "Assess a field using evidence that can be checked at its source, then reused at the next decision.", a1cta: "Explore finance use cases",
-        a2t: "Buyers and supply chains", a2b: "See where produce came from and which farmer and field records support the claim.", a2cta: "Explore market use cases",
-        a3t: "Governments and NGOs", a3b: "Track who a program reaches and what changes in the field without rebuilding the record each time.", a3cta: "Explore program use cases",
-        a4t: "Builders and researchers", a4b: "Build products and models on agricultural records shared with permission.", a4cta: "Build with 5am.earth",
-        a5t: "Agri-Entrepreneurs", a5b: "Turn fieldwork into a verified contribution that strengthens the next service you provide.", a5cta: "Join the field network",
-        a6t: "Farmers", a6b: "Keep one portable farmer and field record for the services you choose to access.", a6cta: "See the farmer benefit",
       }),
       sec("home-outcome", "home", "Farmer outcome", 4, {
         eyebrow: "The farmer-centered outcome",
-        h2: "The record stays useful after the first check.",
+        h2: "The record stays useful after the first verification.",
         lede: "A farmer can give the next lender, buyer or service provider access to the same verified record instead of starting again.",
         o1: "Portable farmer and field identity",
         o2: "Reduced repeated verification",
@@ -175,31 +197,32 @@ export function defaultContent(): SiteContent {
       sec("home-partners", "home", "Partners", 6, {
         eyebrow: "Our partners",
         h2: "No single partner can verify the whole picture.",
-        intro: "Syngenta Foundation India brings the field network. Technical partners contribute satellite checks, training and the record infrastructure.",
+        bullets: "Syngenta Foundation India brings the field network.\nTechnical partners contribute satellite verification, training and the record infrastructure.",
         cta: "Meet our partners",
-      }),
+        cta2: "Become a partner",
+      }, "/collage/case-study-map.png"),
       sec("home-lead", "home", "Lead form CTA", 7, {
         eyebrow: "Build the next use case",
         h2: "Which decision needs better field evidence?",
-        body: "Tell us what you need to decide and what evidence you have today. We will map the missing checks and the right partners.",
+        body: "Tell us what you need to decide and what evidence you have today. We will map the missing verifications and the right partners.",
         cta: "Start the conversation",
       }),
 
       sec("process-hero", "process", "Hero", 0, {
         eyebrow: "The Process",
-        h1: "One field record. Four checks before it travels.",
-        body: "5am.earth connects local evidence with satellite checks, consent and a traceable record of origin.",
+        h1: "One field record. Four verifications before it travels.",
+        body: "5am.earth connects local evidence with satellite verification, consent and a traceable record of origin.",
       }, "/collage/process-flow.png"),
       sec("process-stages", "process", "Four stage cards + infographic", 1, {
         s1t: "Capture", s1b: "An Agri-Entrepreneur records the farmer, field and activity where the work happens.",
-        s2t: "Validate", s2b: "Satellite imagery checks field boundaries against current signals and land history.",
+        s2t: "Validate", s2b: "Satellite imagery verifies field boundaries against current signals and land history.",
         s3t: "Authenticate", s3b: "Identity and consent are attached to the evidence. Its source can now be traced.",
         s4t: "Reuse", s4b: "The farmer can permit the same record to support another service or decision.",
       }, "/collage/verification-stack-bone.png"),
       sec("process-why", "process", "Why different", 2, {
         eyebrow: "Why this is different",
         h2: "Verify the evidence once. Keep its history.",
-        o1: "Fewer repeated field checks",
+        o1: "Fewer repeated field verifications",
         o2: "Clearer confidence and provenance",
         o3: "Portable records for farmers",
         o4: "Reusable evidence for organizations",
@@ -288,7 +311,7 @@ export function defaultContent(): SiteContent {
       }, "/collage/soil-hand.png"),
       sec("contact-form", "contact", "Form panel", 1, {
         eyebrow: "How can we work together?",
-        o1: "Access verified agricultural data",
+        o1: "Access verified agricultural information",
         o2: "Build a product or service",
         o3: "Contribute field or satellite data",
         o4: "Fund or partner with the ecosystem",
@@ -307,7 +330,7 @@ export function defaultContent(): SiteContent {
         stat2n: "21K+", stat2l: "trained Agri-Entrepreneurs",
         stat3n: "100K", stat3l: "farmers in the planned initial deployment",
         s1t: "The challenge", s1b: "Farmer and field evidence is repeatedly collected, difficult to reuse, and often disconnected from financial and market services.",
-        s2t: "The system", s2b: "Agri-Entrepreneurs capture field information. Satellite data validates boundaries and land signals. Cardano infrastructure records verifiable provenance.",
+        s2t: "The system", s2b: "Agri-Entrepreneurs capture field data. Satellite data validates boundaries and land signals. Cardano infrastructure records verifiable provenance.",
         s3t: "The first use cases", s3b: "Blockchain-verified land border records and historical sustainability ratings create reusable evidence for services and decisions.",
         s4t: "The intended value", s4b: "Lower risk for financial partners, better service delivery, and new pathways to finance, insurance, markets, and advisory support.",
         quote: "Verified once. Reused across the next service, decision, and opportunity.",
@@ -319,7 +342,7 @@ export function defaultContent(): SiteContent {
       }),
     ],
     useCases: [
-      { id: "uc1", order: 0, title: "Finance and insurance", body: "Check a field boundary and its history before pricing risk or extending a service." },
+      { id: "uc1", order: 0, title: "Finance and insurance", body: "Verify a field boundary and its history before pricing risk or extending a service." },
       { id: "uc2", order: 1, title: "Markets and procurement", body: "Trace a sourcing claim back to the farmer and field evidence behind it." },
       { id: "uc3", order: 2, title: "Farmer services", body: "Use field history and crop signals to decide what support is needed now." },
       { id: "uc4", order: 3, title: "Sustainability", body: "Compare current claims with historical satellite evidence and recorded fieldwork." },
@@ -332,7 +355,36 @@ export function defaultContent(): SiteContent {
       { id: "tm3", order: 2, name: "Field and program", role: "Field & program", bio: "Agri-Entrepreneur enablement, farmer relationships, training, and local delivery.", photo: "" },
       { id: "tm4", order: 3, name: "Technology and verification", role: "Technology & verification", bio: "Earth observation, secure provenance, identity, and platform infrastructure.", photo: "" },
     ],
+    partners: [
+      { id: "pt1", order: 0, name: "Syngenta Foundation India", logo: "https://aegf.in/wp-content/uploads/2025/03/SFI_SFI.png", visible: true },
+      { id: "pt2", order: 1, name: "Cardano Foundation", logo: "", visible: true },
+      { id: "pt3", order: 2, name: "Andamio", logo: "https://www.andamio.io/andamio-logo-w-typography.jpg", visible: true },
+    ],
+    audiences: [
+      { id: "au1", order: 0, visible: true, title: "Financial institutions", body: "Assess a field using evidence that can be verified at its source, then reused at the next decision.", cta: "Explore finance use cases" },
+      { id: "au2", order: 1, visible: true, title: "Buyers and supply chains", body: "See where produce came from and which farmer and field records support the claim.", cta: "Explore market use cases" },
+      { id: "au3", order: 2, visible: true, title: "Governments and NGOs", body: "Track who a program reaches and what changes in the field without rebuilding the record each time.", cta: "Explore program use cases" },
+      { id: "au4", order: 3, visible: true, title: "Builders and researchers", body: "Build products and models on agricultural records shared with permission.", cta: "Build with 5am.earth" },
+      { id: "au5", order: 4, visible: true, title: "Agri-Entrepreneurs", body: "Turn fieldwork into a verified contribution that strengthens the next service you provide.", cta: "Join the field network" },
+      { id: "au6", order: 5, visible: true, title: "Farmers", body: "Keep one portable farmer and field record for the services you choose to access.", cta: "See the farmer benefit" },
+    ],
+    settings: {
+      headerBg: "#EAE2D7",
+      footerTagline: "Grow trust. Create opportunity.",
+      footerCopyright: "© {year} 5am.earth Foundation",
+      footerMeta: "A neutral foundation for verified agricultural intelligence",
+    },
   };
+
+  // Default image position per section: side-by-side hero layouts put the
+  // image on the right of the text; the two "case" feature layouts put it
+  // on the left — matches how each is actually built today.
+  for (const s of content.sections) {
+    if (!s.image) continue;
+    s.image.position = s.id === "home-case" || s.id === "home-partners" ? "left" : "right";
+  }
+
+  return content;
 }
 
 export function getContent(): SiteContent {
@@ -341,8 +393,82 @@ export function getContent(): SiteContent {
     const parsed = JSON.parse(raw) as SiteContent;
     // Backfill fields added after this file was first saved, so older
     // content.json files on disk pick up new capabilities automatically.
+    let needsSave = false;
     if (!parsed.pages) {
       parsed.pages = defaultContent().pages;
+      needsSave = true;
+    }
+    if (!parsed.partners) {
+      parsed.partners = defaultContent().partners;
+      needsSave = true;
+    }
+    if (!parsed.audiences) {
+      // Migrate legacy a1t/a1b/a1cta..a6* fields out of the home-users
+      // section content, if present, so existing edits carry over instead
+      // of silently reverting to defaults.
+      const usersSection = parsed.sections?.find((s) => s.id === "home-users");
+      const legacy = usersSection?.content;
+      if (legacy && legacy.a1t) {
+        parsed.audiences = [1, 2, 3, 4, 5, 6].map((i) => ({
+          id: `au${i}`,
+          order: i - 1,
+          visible: true,
+          title: legacy[`a${i}t`] ?? "",
+          body: legacy[`a${i}b`] ?? "",
+          cta: legacy[`a${i}cta`] ?? "",
+        }));
+        for (let i = 1; i <= 6; i++) {
+          delete legacy[`a${i}t`];
+          delete legacy[`a${i}b`];
+          delete legacy[`a${i}cta`];
+        }
+      } else {
+        parsed.audiences = defaultContent().audiences;
+      }
+      needsSave = true;
+    }
+    const partnersSection = parsed.sections?.find((s) => s.id === "home-partners");
+    if (partnersSection && partnersSection.content.cta2 === undefined) {
+      partnersSection.content.cta2 = "Become a partner";
+      needsSave = true;
+    }
+    if (!parsed.settings) {
+      parsed.settings = defaultContent().settings;
+      needsSave = true;
+    }
+    if (parsed.settings.footerTagline === undefined) {
+      const d = defaultContent().settings;
+      parsed.settings.footerTagline = d.footerTagline;
+      parsed.settings.footerCopyright = d.footerCopyright;
+      parsed.settings.footerMeta = d.footerMeta;
+      needsSave = true;
+    }
+    if (partnersSection && partnersSection.content.bullets === undefined) {
+      // Carry over the old free-flowing "intro" paragraph as the seed for
+      // the new bulleted list — split on existing line breaks/sentences so
+      // whatever was already written becomes the first bullets, rather than
+      // reverting to the default copy.
+      const legacyIntro = partnersSection.content.intro ?? "";
+      const lines = legacyIntro
+        .split(/\n+/)
+        .flatMap((line) => line.split(/(?<=[.!?])\s+(?=[A-Z])/))
+        .map((s) => s.trim())
+        .filter(Boolean);
+      partnersSection.content.bullets = lines.length > 0 ? lines.join("\n") : defaultContent().sections.find((s) => s.id === "home-partners")!.content.bullets;
+      delete partnersSection.content.intro;
+      needsSave = true;
+    }
+    if (partnersSection && !partnersSection.image) {
+      partnersSection.image = { src: "/collage/case-study-map.png", scale: 100 };
+      needsSave = true;
+    }
+    for (const s of parsed.sections ?? []) {
+      if (s.image && !s.image.position) {
+        s.image.position = s.id === "home-case" || s.id === "home-partners" ? "left" : "right";
+        needsSave = true;
+      }
+    }
+    if (needsSave) {
       try {
         saveContent(parsed);
       } catch {
@@ -422,6 +548,14 @@ export function typographyCss(tp: Typography): string {
       --tp-caption-size: ${tp.caption.size}px;
       --tp-caption-ls: ${tp.caption.letterSpacing / 1000}em;
       --tp-caption-lh: ${tp.caption.lineHeight / 100};
+    }
+  `;
+}
+
+export function siteSettingsCss(settings: SiteSettings): string {
+  return `
+    :root {
+      --header-bg: ${settings.headerBg || "#EAE2D7"};
     }
   `;
 }

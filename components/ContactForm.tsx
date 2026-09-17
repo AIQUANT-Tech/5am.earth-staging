@@ -63,7 +63,7 @@ export default function ContactForm() {
         How can we work together?
         <select name="role" defaultValue="">
           <option value="" disabled>Select a route</option>
-          <option>Access verified data</option>
+          <option>Access verified information</option>
           <option>Build a solution</option>
           <option>Contribute data</option>
           <option>Fund or partner</option>

@@ -53,7 +53,7 @@ export default function DemoModal({ open, onClose }: { open: boolean; onClose: (
               Your interest
               <select defaultValue="">
                 <option value="" disabled>Select one</option>
-                <option>Accessing verified data</option>
+                <option>Accessing verified information</option>
                 <option>Building a solution</option>
                 <option>Contributing data</option>
                 <option>Funding or partnering</option>

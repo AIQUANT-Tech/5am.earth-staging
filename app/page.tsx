@@ -5,7 +5,7 @@ import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import SectionMedia from "../components/SectionMedia";
 import { getContent, getSection, sectionStyle, sectionClassName, t } from "../lib/content";
-
+import { asset } from "../lib/imageLoader";
 
 function nl(s: string) {
   return s.split("\n").map((line, i) => (
@@ -24,14 +24,10 @@ export default function Home() {
   const users = getSection(content, "home-users");
   const outcome = getSection(content, "home-outcome");
   const caseSec = getSection(content, "home-case");
-  const partners = getSection(content, "home-partners");
+  const partnersSection = getSection(content, "home-partners");
   const lead = getSection(content, "home-lead");
 
-  const audiences = [1, 2, 3, 4, 5, 6].map((i) => ({
-    t: t(users, `a${i}t`),
-    b: t(users, `a${i}b`),
-    cta: t(users, `a${i}cta`),
-  }));
+  const audiences = [...content.audiences].filter((a) => a.visible).sort((a, b) => a.order - b.order);
 
   return (
     <main>
@@ -39,7 +35,7 @@ export default function Home() {
 
       {hero?.style.visible !== false && (
         <section className={`hero surface-bone ${sectionClassName(hero)}`} style={sectionStyle(hero)}>
-          <div className="wrap hero-grid">
+          <div className={`wrap hero-grid ${hero?.image?.position === "left" ? "media-left" : ""}`}>
             <div>
               <p className="eyebrow hero-eyebrow">{t(hero, "eyebrow")}</p>
               <h1>{nl(t(hero, "h1"))}</h1>
@@ -52,7 +48,10 @@ export default function Home() {
                 <a className="btn btn-ink" href="#network">{t(hero, "cta2")}</a>
               </div>
             </div>
-            <div className="hero-art" style={hero?.image ? { width: `${hero.image.scale}%`, marginLeft: "auto" } : undefined}>
+            <div
+              className="hero-art"
+              style={hero?.image ? { width: `${hero.image.scale}%`, marginLeft: hero.image.position === "left" ? 0 : "auto", marginRight: hero.image.position === "left" ? "auto" : 0 } : undefined}
+            >
               <Image src={hero?.image?.src || "/collage/hero-hands.png"} alt="A verified field record: hands holding soil and a sprout, an aerial farm boundary, and a field ledger" width={1600} height={1200} priority />
             </div>
           </div>
@@ -132,10 +131,10 @@ export default function Home() {
             <SectionMedia section={users} alt="Farmers and organizations across the 5am.earth ecosystem" />
             <div className="cell-grid">
               {audiences.map((a, i) => (
-                <article className="cell" key={a.t}>
+                <article className="cell" key={a.id}>
                   <span className="cell-num">0{i + 1}</span>
-                  <h3>{a.t}</h3>
-                  <p>{a.b}</p>
+                  <h3>{a.title}</h3>
+                  <p>{a.body}</p>
                   <Link href="/contact">{a.cta}</Link>
                 </article>
               ))}
@@ -165,51 +164,80 @@ export default function Home() {
         </section>
       )}
 
-      {caseSec?.style.visible !== false && (
-        <section className={`surface-pink ${sectionClassName(caseSec)}`} style={sectionStyle(caseSec)}>
-          <div className="wrap">
-            <p className="eyebrow">{t(caseSec, "eyebrow")}</p>
-            <div className="case-grid">
-              <div>
-                <h2>{t(caseSec, "h2")}</h2>
-                <p>{t(caseSec, "body")}</p>
-                <div className="case-metrics">
-                  <span><b>{t(caseSec, "m1t")}</b>{t(caseSec, "m1b")}</span>
-                  <span><b>{t(caseSec, "m2t")}</b>{t(caseSec, "m2b")}</span>
-                  <span><b>{t(caseSec, "m3t")}</b>{t(caseSec, "m3b")}</span>
-                </div>
-                <Link className="text-link" href="/case-studies">{t(caseSec, "cta")}</Link>
-              </div>
-              <div className="case-media" style={caseSec?.image ? { width: `${caseSec.image.scale}%`, marginLeft: "auto" } : undefined}>
-                <Image src={caseSec?.image?.src || "/collage/case-study-pink.png"} alt="A farmer holding harvested grain, connected to her farm ledger, produce basket, seedlings, and market records" width={1240} height={1240} />
+      {caseSec?.style.visible !== false && (() => {
+        const mediaFirst = caseSec?.image?.position !== "right";
+        const media = (
+          <div className="case-media" style={caseSec?.image ? { width: `${caseSec.image.scale}%` } : undefined}>
+            <Image src={caseSec?.image?.src || "/collage/case-study-pink.png"} alt="A farmer holding harvested grain, connected to her farm ledger, produce basket, seedlings, and market records" width={1240} height={1240} />
+          </div>
+        );
+        const text = (
+          <div>
+            <h2>{t(caseSec, "h2")}</h2>
+            <p>{t(caseSec, "body")}</p>
+            <div className="case-metrics">
+              <span><b>{t(caseSec, "m1t")}</b>{t(caseSec, "m1b")}</span>
+              <span><b>{t(caseSec, "m2t")}</b>{t(caseSec, "m2b")}</span>
+              <span><b>{t(caseSec, "m3t")}</b>{t(caseSec, "m3b")}</span>
+            </div>
+            <Link className="text-link" href="/case-studies">{t(caseSec, "cta")}</Link>
+          </div>
+        );
+        return (
+          <section className={`surface-pink ${sectionClassName(caseSec)}`} style={sectionStyle(caseSec)}>
+            <div className="wrap">
+              <p className="eyebrow">{t(caseSec, "eyebrow")}</p>
+              <div className={`case-grid ${mediaFirst ? "case-grid-reverse" : ""}`}>
+                {mediaFirst ? <>{media}{text}</> : <>{text}{media}</>}
               </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
-      {partners?.style.visible !== false && (
-        <section className={`surface-bone ${sectionClassName(partners)}`} style={sectionStyle(partners)}>
-          <div className="wrap">
-            <div className="section-head">
-              <div>
-                <p className="eyebrow">{t(partners, "eyebrow")}</p>
-                <h2>{t(partners, "h2")}</h2>
-              </div>
-              <p>{t(partners, "intro")}</p>
-            </div>
-            <SectionMedia section={partners} alt="5am.earth partners in the field" />
-            <div className="partner-logos">
-              <div><img src="https://aegf.in/wp-content/uploads/2025/03/SFI_SFI.png" alt="Syngenta Foundation India" /></div>
-              <div className="cardano-mark"><span>Cardano</span><small>Foundation</small></div>
-              <div><img src="https://www.andamio.io/andamio-logo-w-typography.jpg" alt="Andamio" /></div>
-            </div>
-            <div style={{ marginTop: 32 }}>
-              <Link className="btn btn-ink" href="/partners">{t(partners, "cta")}</Link>
+      {partnersSection?.style.visible !== false && (() => {
+        const mediaFirst = partnersSection?.image?.position !== "right";
+        const media = (
+          <div className="case-media" style={partnersSection?.image ? { width: `${partnersSection.image.scale}%` } : undefined}>
+            <Image src={partnersSection?.image?.src || "/collage/case-study-map.png"} alt="Farmers and a field agent reviewing a satellite field boundary map together" width={1240} height={920} />
+          </div>
+        );
+        const text = (
+          <div>
+            <h2>{t(partnersSection, "h2")}</h2>
+            <ul className="partner-bullets">
+              {t(partnersSection, "bullets")
+                .split("\n")
+                .map((line) => line.trim())
+                .filter(Boolean)
+                .map((line, i) => (
+                  <li key={i}>{line}</li>
+                ))}
+            </ul>
+            <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <Link className="btn btn-outline" href="/partners">{t(partnersSection, "cta")}</Link>
+              <Link className="btn btn-green" href="/contact">{t(partnersSection, "cta2")}</Link>
             </div>
           </div>
-        </section>
-      )}
+        );
+        return (
+          <section className={`surface-bone ${sectionClassName(partnersSection)}`} style={sectionStyle(partnersSection)}>
+            <div className="wrap">
+              <p className="eyebrow">{t(partnersSection, "eyebrow")}</p>
+              <div className={`case-grid ${mediaFirst ? "case-grid-reverse" : ""}`}>
+                {mediaFirst ? <>{media}{text}</> : <>{text}{media}</>}
+              </div>
+              <div className="partner-logos" style={{ marginTop: 64 }}>
+                {[...content.partners].filter((p) => p.visible).sort((a, b) => a.order - b.order).map((p) => (
+                  <div key={p.id}>
+                    {p.logo ? <img src={asset(p.logo)} alt={p.name} /> : <span className="partner-textmark">{p.name}</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {lead?.style.visible !== false && (
         <section className={`surface-green ${sectionClassName(lead)}`} style={sectionStyle(lead)}>
@@ -227,7 +255,7 @@ export default function Home() {
                 I am interested in
                 <select defaultValue="">
                   <option value="" disabled>Select a route</option>
-                  <option>Accessing verified data</option>
+                  <option>Accessing verified information</option>
                   <option>Building a solution</option>
                   <option>Contributing data</option>
                   <option>Funding or partnering</option>
@@ -240,7 +268,7 @@ export default function Home() {
         </section>
       )}
 
-      <SiteFooter />
+      <SiteFooter settings={content.settings} />
     </main>
   );
 }

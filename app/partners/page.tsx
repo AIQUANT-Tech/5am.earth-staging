@@ -4,7 +4,7 @@ import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
 import { getContent, getSection, sectionStyle, sectionClassName, t } from "../../lib/content";
-
+import { asset } from "../../lib/imageLoader";
 
 const benefitDefaults = [
   ["Farmers", "Gain portable recognition and stronger pathways to finance, markets, insurance, and essential services."],
@@ -27,7 +27,7 @@ export default function Partners() {
       <SiteHeader pages={content.pages} />
       {hero?.style.visible !== false && (
         <section className={`inner-hero surface-bone ${sectionClassName(hero)}`} style={sectionStyle(hero)}>
-          <div className="wrap inner-hero-grid">
+          <div className={`wrap inner-hero-grid ${hero?.image?.position === "left" ? "media-left" : ""}`}>
             <div>
               <p className="eyebrow">{t(hero, "eyebrow")}</p>
               <h1>{t(hero, "h1")}</h1>
@@ -43,9 +43,11 @@ export default function Partners() {
       <section className="surface-paper">
         <div className="wrap">
           <div className="partner-logos">
-            <div><img src="https://aegf.in/wp-content/uploads/2025/03/SFI_SFI.png" alt="Syngenta Foundation India" /></div>
-            <div className="cardano-mark"><span>Cardano</span><small>Foundation</small></div>
-            <div><img src="https://www.andamio.io/andamio-logo-w-typography.jpg" alt="Andamio" /></div>
+            {[...content.partners].filter((p) => p.visible).sort((a, b) => a.order - b.order).map((p) => (
+              <div key={p.id}>
+                {p.logo ? <img src={asset(p.logo)} alt={p.name} /> : <span className="partner-textmark">{p.name}</span>}
+              </div>
+            ))}
           </div>
 
           {infographic?.style.visible !== false && (
@@ -92,7 +94,7 @@ export default function Partners() {
           </div>
         </section>
       )}
-      <SiteFooter />
+      <SiteFooter settings={content.settings} />
     </main>
   );
 }

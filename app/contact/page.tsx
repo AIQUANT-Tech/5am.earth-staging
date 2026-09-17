@@ -2,9 +2,8 @@ import Image from "next/image";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
-import ContactForm from "../../components/ContactForm";
 import { getContent, getSection, sectionStyle, sectionClassName, t } from "../../lib/content";
-
+import ContactForm from "../../components/ContactForm";
 
 export default function Contact() {
   const content = getContent();
@@ -16,7 +15,7 @@ export default function Contact() {
       <SiteHeader pages={content.pages} />
       {hero?.style.visible !== false && (
         <section className={`inner-hero surface-bone ${sectionClassName(hero)}`} style={sectionStyle(hero)}>
-          <div className="wrap inner-hero-grid">
+          <div className={`wrap inner-hero-grid ${hero?.image?.position === "left" ? "media-left" : ""}`}>
             <div>
               <p className="eyebrow">{t(hero, "eyebrow")}</p>
               <h1>{t(hero, "h1")}</h1>
@@ -44,7 +43,7 @@ export default function Contact() {
           <ContactForm />
         </div>
       </section>
-      <SiteFooter />
+      <SiteFooter settings={content.settings} />
     </main>
   );
 }

@@ -4,7 +4,7 @@ import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
 import { getContent, getSection, sectionStyle, sectionClassName, t } from "../../lib/content";
-
+import { asset } from "../../lib/imageLoader";
 
 export default function Team() {
   const content = getContent();
@@ -18,7 +18,7 @@ export default function Team() {
       <SiteHeader pages={content.pages} />
       {hero?.style.visible !== false && (
         <section className={`inner-hero surface-bone ${sectionClassName(hero)}`} style={sectionStyle(hero)}>
-          <div className="wrap inner-hero-grid">
+          <div className={`wrap inner-hero-grid ${hero?.image?.position === "left" ? "media-left" : ""}`}>
             <div>
               <p className="eyebrow">{t(hero, "eyebrow")}</p>
               <h1>{t(hero, "h1")}</h1>
@@ -46,7 +46,7 @@ export default function Team() {
               {members.map((m) => (
                 <article className="team-card" key={m.id}>
                   {m.photo ? (
-                    <img src={`/5am.earth-staging${m.photo}`} alt={m.name} className="team-portrait" style={{ objectFit: "cover" }} />
+                    <img src={asset(m.photo)} alt={m.name} className="team-portrait" style={{ objectFit: "cover" }} />
                   ) : (
                     <div className="team-portrait">Team portrait</div>
                   )}
@@ -72,7 +72,7 @@ export default function Team() {
           </div>
         </section>
       )}
-      <SiteFooter />
+      <SiteFooter settings={content.settings} />
     </main>
   );
 }

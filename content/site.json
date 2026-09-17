@@ -32,7 +32,7 @@
       "label": "Hero",
       "order": 0,
       "style": {
-        "bg": "#e7e0d8",
+        "bg": "#F7F2EB",
         "textColor": "",
         "padding": "full",
         "rounded": false,
@@ -40,16 +40,17 @@
         "visible": true
       },
       "content": {
-        "eyebrow": "Secure, open agricultural data ecosystem",
-        "h1": "Grow trust.\nCreate opportunity.",
-        "sub1": "5am.earth makes verified farmer and field data reusable across the agricultural value chain. \nMake every farmer and every verified contribution count.",
+        "eyebrow": "Secure, open agricultural information ecosystem",
+        "h1": "Grow trust.\nCreate Opportunities.",
+        "sub1": "5am.Earth makes trusted agricultural information from the ground easier and more affordable to access.\nHelping organizations uncover insights and unlock new business opportunities.",
         "sub2": "",
         "cta1": "Explore a partnership",
         "cta2": "See the data"
       },
       "image": {
-        "src": "/collage/hero-hands.png",
-        "scale": 100
+        "src": "/uploads/1789366674884-ChatGPT-Image-Sep-14--2026--01_17_13-PM.png",
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -63,7 +64,7 @@
         "padding": "full",
         "rounded": false,
         "marginY": 0,
-        "visible": true
+        "visible": false
       },
       "content": {
         "eyebrow": "The network today",
@@ -103,13 +104,14 @@
       },
       "content": {
         "eyebrow": "How a record earns trust",
-        "h2": "A claim is useful only if others can check it.",
-        "lede": "Local field knowledge establishes what happened. Satellite evidence checks the place and its history. Consent determines where the record can go next.",
+        "h2": "A claim is useful only if others can verify it.",
+        "lede": "Local field knowledge establishes what happened. Satellite evidence verifies the place and its history.  Consent determines where the record can go next.",
         "cta": "See how verification works"
       },
       "image": {
-        "src": "/collage/verification-stack-ink.png",
-        "scale": 100
+        "src": "/uploads/1789618214528-diagram_03_01.png",
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -128,25 +130,7 @@
       "content": {
         "eyebrow": "One foundation, many users",
         "h2": "Start with the value you need.",
-        "intro": "One verified record can answer different questions. Choose the decision you need to make.",
-        "a1t": "Financial institutions",
-        "a1b": "Assess a field using evidence that can be checked at its source, then reused at the next decision.",
-        "a1cta": "Explore finance use cases",
-        "a2t": "Buyers and supply chains",
-        "a2b": "See where produce came from and which farmer and field records support the claim.",
-        "a2cta": "Explore market use cases",
-        "a3t": "Governments and NGOs",
-        "a3b": "Track who a program reaches and what changes in the field without rebuilding the record each time.",
-        "a3cta": "Explore program use cases",
-        "a4t": "Builders and researchers",
-        "a4b": "Build products and models on agricultural records shared with permission.",
-        "a4cta": "Build with 5am.earth",
-        "a5t": "Agri-Entrepreneurs",
-        "a5b": "Turn fieldwork into a verified contribution that strengthens the next service you provide.",
-        "a5cta": "Join the field network",
-        "a6t": "Farmers",
-        "a6b": "Keep one portable farmer and field record for the services you choose to access.",
-        "a6cta": "See the farmer benefit"
+        "intro": "The same farmer is verified repeatedly — by banks, buyers, insurers, and governments — each paying the full cost, creating another isolated record that no one else can use. This makes every service built on top prohibitively expensive, locking smallholder farmers out of finance, markets, and support."
       }
     },
     {
@@ -165,7 +149,7 @@
       "content": {
         "eyebrow": "The farmer-centered outcome",
         "h2": "The record stays useful after the first check.",
-        "lede": "A farmer can give the next lender, buyer or service provider access to the same verified record instead of starting again.",
+        "lede": "5am.earth solution drives down the cost of trusted field information,  the cost of every service built on it — loans, insurance, traceability, government programmes.",
         "o1": "Portable farmer and field identity",
         "o2": "Reduced repeated verification",
         "o3": "Stronger visibility for lenders and buyers",
@@ -188,7 +172,7 @@
       "content": {
         "eyebrow": "Featured use case",
         "h2": "Satellite Oracle for smallholder agriculture.",
-        "body": "The first use case combines local field records with satellite evidence. Cardano records the source and history of each verification.",
+        "body": "The first use case combines local field records with satellite evidence. Identities and information from multiple sources are anchored on the Cardano blockchain, so any record can be independently verified by anyone, without exposing a farmer’s personal data.",
         "m1t": "Use case 01",
         "m1b": "Land border verification",
         "m2t": "Use case 02",
@@ -199,7 +183,8 @@
       },
       "image": {
         "src": "/uploads/1788351715639-pink-collage.png",
-        "scale": 100
+        "scale": 100,
+        "position": "left"
       }
     },
     {
@@ -217,9 +202,15 @@
       },
       "content": {
         "eyebrow": "Our partners",
-        "h2": "No single partner can verify the whole picture.",
-        "intro": "Syngenta Foundation India brings the field network. Technical partners contribute satellite checks, training and the record infrastructure.",
-        "cta": "Meet our partners"
+        "h2": "World class partners are already engaged. ",
+        "cta": "Meet our partners",
+        "cta2": "Become a partner",
+        "bullets": "Help us build the world’s leading farmer community, powered by trusted information.”\n\nCreate more value through new applications and business opportunities."
+      },
+      "image": {
+        "src": "/collage/case-study-map.png",
+        "scale": 100,
+        "position": "left"
       }
     },
     {
@@ -262,7 +253,8 @@
       },
       "image": {
         "src": "/uploads/1788435655209-teaminground.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -290,7 +282,8 @@
       },
       "image": {
         "src": "/collage/verification-stack-bone.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -354,7 +347,8 @@
       },
       "image": {
         "src": "/uploads/1788346191229-ChatGPT-Image-Sep-2--2026--04_37_47-PM--.png",
-        "scale": 92
+        "scale": 92,
+        "position": "right"
       }
     },
     {
@@ -390,7 +384,8 @@
       },
       "image": {
         "src": "/collage/use-case-farmer.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       },
       "image2": {
         "src": "/collage/network-satellite.png",
@@ -480,7 +475,8 @@
       },
       "image": {
         "src": "/collage/network-map.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -499,7 +495,8 @@
       "content": {},
       "image": {
         "src": "/collage/partners-pair.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -560,7 +557,8 @@
       },
       "image": {
         "src": "/uploads/1788355255790-fliped.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -621,7 +619,8 @@
       },
       "image": {
         "src": "/uploads/1788352110248-ChatGPT-Image-Sep-2--2026--07_28_01-PM.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -639,9 +638,9 @@
       },
       "content": {
         "eyebrow": "How can we work together?",
-        "o1": "Access verified agricultural data",
+        "o1": "Access verified agricultural information",
         "o2": "Build a product or service",
-        "o3": "Contribute field or satellite data",
+        "o3": "Contribute field or satellite information",
         "o4": "Fund or partner with the ecosystem"
       }
     },
@@ -665,7 +664,8 @@
       },
       "image": {
         "src": "/collage/finance-grid.png",
-        "scale": 100
+        "scale": 100,
+        "position": "right"
       }
     },
     {
@@ -825,19 +825,19 @@
       "id": "use-cases",
       "label": "Use Cases",
       "href": "/use-cases",
-      "navVisible": true
+      "navVisible": false
     },
     {
       "id": "partners",
       "label": "Our Partners",
       "href": "/partners",
-      "navVisible": true
+      "navVisible": false
     },
     {
       "id": "team",
       "label": "Company Team",
       "href": "/team",
-      "navVisible": true
+      "navVisible": false
     },
     {
       "id": "contact",
@@ -851,5 +851,84 @@
       "href": "/case-studies",
       "navVisible": false
     }
-  ]
+  ],
+  "partners": [
+    {
+      "id": "pt1",
+      "order": 0,
+      "name": "Syngenta Foundation India",
+      "logo": "https://aegf.in/wp-content/uploads/2025/03/SFI_SFI.png",
+      "visible": false
+    },
+    {
+      "id": "pt2",
+      "order": 1,
+      "name": "Cardano Foundation",
+      "logo": "",
+      "visible": false
+    },
+    {
+      "id": "pt3",
+      "order": 2,
+      "name": "Andamio",
+      "logo": "https://www.andamio.io/andamio-logo-w-typography.jpg",
+      "visible": false
+    }
+  ],
+  "audiences": [
+    {
+      "id": "au1",
+      "order": 0,
+      "visible": true,
+      "title": "Financial institutions",
+      "body": "Assess a field using evidence that can be checked at its source, then reused at the next decision.",
+      "cta": "Explore finance use cases"
+    },
+    {
+      "id": "au2",
+      "order": 1,
+      "visible": true,
+      "title": "Buyers and supply chains",
+      "body": "See where produce came from and which farmer and field records support the claim.",
+      "cta": "Explore market use cases"
+    },
+    {
+      "id": "au3",
+      "order": 2,
+      "visible": true,
+      "title": "Governments and NGOs",
+      "body": "Track who a program reaches and what changes in the field without rebuilding the record each time.",
+      "cta": "Explore program use cases"
+    },
+    {
+      "id": "au4",
+      "order": 3,
+      "visible": false,
+      "title": "Builders and researchers",
+      "body": "Build products and models on agricultural records shared with permission.",
+      "cta": "Build with 5am.earth"
+    },
+    {
+      "id": "au5",
+      "order": 4,
+      "visible": false,
+      "title": "Agri-Entrepreneurs",
+      "body": "Turn fieldwork into a verified contribution that strengthens the next service you provide.",
+      "cta": "Join the field network"
+    },
+    {
+      "id": "au6",
+      "order": 5,
+      "visible": false,
+      "title": "Farmers",
+      "body": "Keep one portable farmer and field record for the services you choose to access.",
+      "cta": "See the farmer benefit"
+    }
+  ],
+  "settings": {
+    "headerBg": "#F7F2EB",
+    "footerTagline": "Grow trust. Create opportunities",
+    "footerCopyright": "© {year} 5am.earth Foundation",
+    "footerMeta": "A neutral foundation for verified agricultural intelligence"
+  }
 }

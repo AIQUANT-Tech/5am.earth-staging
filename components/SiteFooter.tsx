@@ -1,6 +1,14 @@
 import Link from "next/link";
+import type { SiteSettings } from "../lib/content";
 
-export default function SiteFooter() {
+export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
+  const tagline = settings?.footerTagline || "Grow trust. Create opportunity.";
+  const copyright = (settings?.footerCopyright || "© {year} 5am.earth Foundation").replace(
+    "{year}",
+    String(new Date().getFullYear())
+  );
+  const meta = settings?.footerMeta || "A neutral foundation for verified agricultural intelligence";
+
   return (
     <footer className="site-footer">
       <div className="wrap">
@@ -8,7 +16,7 @@ export default function SiteFooter() {
           <div>
             <div style={{ fontWeight: 800, fontSize: 17, letterSpacing: "-0.02em" }}>5am.earth</div>
             <p style={{ color: "var(--c-fg-muted)", fontSize: 14, marginTop: 8, maxWidth: 320 }}>
-              Grow trust. Create opportunity.
+              {tagline}
             </p>
           </div>
           <nav className="footer-links">
@@ -22,8 +30,8 @@ export default function SiteFooter() {
         </div>
         <div className="footer-wordmark">5am.earth</div>
         <div className="footer-meta">
-          <span>&copy; {new Date().getFullYear()} 5am.earth Foundation</span>
-          <span>A neutral foundation for verified agricultural intelligence</span>
+          <span>{copyright}</span>
+          <span>{meta}</span>
         </div>
       </div>
     </footer>
