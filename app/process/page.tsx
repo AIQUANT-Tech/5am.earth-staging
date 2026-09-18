@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_FULL, SIZES_HALF } from "../../lib/imageSizes";
 import { Blocks, Database, Satellite, ShieldCheck } from "lucide-react";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
@@ -33,7 +34,7 @@ export default function Process() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/process-flow.png"} alt="A farmer using a phone in the field, linked to a satellite boundary map, plants, and soil" width={1200} height={1000} priority />
+              <Image src={hero?.image?.src || "/collage/process-flow.webp"} alt="A farmer using a phone in the field, linked to a satellite boundary map, plants, and soil" width={1200} height={1000} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>
@@ -55,10 +56,11 @@ export default function Process() {
 
             <div className="infographic-figure" style={stages?.image ? { width: `${stages.image.scale}%`, margin: "56px auto 0" } : undefined}>
               <Image
-                src={stages?.image?.src || "/collage/verification-stack-bone.png"}
+                src={stages?.image?.src || "/collage/verification-stack-bone.webp"}
                 alt="Verification stack: field evidence, satellite signals, secure provenance, producing a verified field record"
                 width={1680}
                 height={946}
+                sizes={SIZES_FULL}
               />
             </div>
 

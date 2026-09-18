@@ -163,3 +163,189 @@ and sufficient for this site.
 - [ ] Confirmed `https://yourdomain.com` loads the site
 - [ ] Confirmed `https://yourdomain.com/5amAdmin` prompts for the password and logs in
 - [ ] Backup plan in place for `content/site.json` and `public/uploads/`
+
+---
+
+## 8. Where the contact email addresses live
+
+There are **two separate** addresses, changed in two different places.
+
+### 8a. The address shown in the footer — in this repo
+
+`content/site.json` → `settings.contactEmail` (currently `yoram@5am.earth`).
+Rendered by `components/SiteFooter.tsx` as a `mailto:` link. Setting it to an
+empty string hides the link. The default, used when the key is missing, is in
+`lib/content.ts` → `defaultContent().settings.contactEmail`.
+
+### 8b. Who the contact form emails — NOT in this repo
+
+`components/ContactForm.tsx` POSTs to a Google Apps Script web app:
+
+```
+https://script.google.com/macros/s/AKfycbzIDQm.../exec
+```
+
+The recipient is hard-coded **inside that Apps Script project**, server-side.
+Nothing in this repo can change it — editing the site will not redirect where
+form submissions land. To change it:
+
+1. Open <https://script.google.com> with the Google account that owns the script.
+2. Open the project behind the `/exec` URL above.
+3. In `Code.gs`, change the recipient passed to `MailApp.sendEmail(...)` /
+   `GmailApp.sendEmail(...)` to `yoram@5am.earth`.
+4. **Deploy → Manage deployments → edit the active deployment → Deploy.**
+   Editing the code alone does nothing until it is redeployed; a *new*
+   deployment produces a new `/exec` URL, which would also have to be updated
+   in `ContactForm.tsx`. Editing the existing deployment keeps the URL stable.
+5. Submit the live form once and confirm the mail arrives.
+
+Because the fetch uses `mode: 'no-cors'`, the browser cannot read the response
+— the page shows "Message sent!" as soon as the request leaves. A misconfigured
+or undeployed script therefore fails **silently**. Step 5 is the only real test.
+
+### What the script actually does (probed from outside, 2026-09-18)
+
+The deployment is live and publicly reachable. `GET /exec` is a health check
+returning `{"ok":true,"info":"5am.earth contact endpoint"}`. `doPost` returns
+JSON via the usual Apps Script 302 → `script.googleusercontent.com/macros/echo`
+redirect, so `curl` can read replies the browser cannot.
+
+Probing with payloads that deliberately trip each guard shows this order —
+**both anti-spam signals are implemented**, and both short-circuit *before*
+field validation, returning a silent success so bots learn nothing:
+
+| # | Check | Response |
+|---|---|---|
+| 1 | `JSON.parse` of the body | `{"ok":false,"error":"Server error"}` |
+| 2 | honeypot `website` non-empty ⇒ **drop** | `{"ok":true}` |
+| 3 | `elapsedMs` too small ⇒ **drop** | `{"ok":true}` |
+| 4 | required fields missing | `{"ok":false,"error":"Missing or invalid fields"}` |
+| 5 | send mail | `{"ok":true}` |
+
+Proof that step 2 really drops: `{}` with an empty `website` returns the
+step-4 validation error, but `{}` with `website` filled returns `{"ok":true}`.
+The honeypot field alone changes the outcome, so it must short-circuit first.
+Same argument for step 3 using `elapsedMs`.
+
+Consequence for testing: a submission with the honeypot filled, **or** with a
+tiny `elapsedMs`, is guaranteed not to email anyone — that is the safe way to
+probe this endpoint without spamming the recipient. Steps 2, 3 and 5 all
+return an identical `{"ok":true}`, so a success response is **not** evidence
+that mail was sent.
+
+**Still unverifiable from outside:** the recipient address, and whether step 5
+actually delivers. Both need the Apps Script project open.
+
+**Check while you are in `Code.gs`:** whether `role` is in the step-4 required
+fields list. The form's `<select>` starts at `value=""` and is not `required`,
+so `role` can legitimately arrive empty; if the script requires it, those
+submissions are rejected at step 4 while the page still says "Message sent!".
+
+### Forms that are not wired up
+
+Two forms are placeholders and submit nowhere — they are not connected to
+the Apps Script or any CRM:
+
+- `components/DemoModal.tsx` — the "See it in action" modal (`type="button"`,
+  no handler; its own caption says "Connect this action to the CRM before launch")
+- `app/page.tsx` — the home page lead form in the green section ("Wireframe form")
+
+Only `/contact` actually delivers anything today.
+
+---
+
+## 9. Images: run the optimizer before committing
+
+`next.config.mjs` uses `output: "export"` with a **custom image loader**
+(`lib/imageLoader.ts`), so Next.js does **no** image optimization of its own —
+whatever byte-for-byte sits in `public/` is what the browser downloads. Two
+things therefore have to be prepared ahead of time, and one script does both:
+
+```bash
+python3 scripts/optimize-images.py     # needs Pillow; --force redoes everything
+```
+
+1. **PNG to WebP.** The collages are large-canvas artwork. As PNG they ran
+   ~2 MB each, which made `/process` a 4.8 MB page. At WebP q=82 they are
+   ~150 KB with no visible difference.
+
+2. **A width ladder** (`name-420w.webp`, `-640w`, `-828w`, `-1280w`, each
+   capped at the source width so a variant is never an upscale).
+   `lib/imageLoader.ts` maps the width next/image asks for onto one of these,
+   which is what makes the emitted `srcset` real — without it every viewport
+   downloads the largest file. A phone now pulls ~17 KB for the home hero
+   instead of ~112 KB.
+
+Three places have to agree, or `srcset` will point at files that do not exist.
+If you change one, change all three:
+
+| Ladder lives in | What it controls |
+|---|---|
+| `scripts/optimize-images.py` -> `LADDER` | which files get generated |
+| `lib/imageLoader.ts` -> `LADDER` | which file a requested width maps to |
+| `next.config.mjs` -> `images.deviceSizes` | which widths Next may put in `srcset` |
+
+**Adding a new image:** drop it in `public/uploads/`, run the script, then
+point the reference at the plain `.webp` (in `content/site.json`, or the
+fallback `src` in the page component) — *not* at a `-640w` variant, the loader
+adds that. Give the `<Image>` a `sizes` prop from `lib/imageSizes.ts`
+(`SIZES_FULL` for a full-width figure, `SIZES_HALF` for one side of a
+two-column grid). Without `sizes`, next/image falls back to a 1x/2x srcset and
+the ladder is wasted.
+
+The original PNGs are kept in `public/` so that any stale `/uploads/*.png`
+path still resolves; they are simply no longer referenced.
+
+---
+
+## 10. The font is served as WOFF2
+
+`public/fonts/` holds both `Manrope-VariableFont_wght.woff2` (54 KB) and the
+original `.ttf` (163 KB). The `@font-face` in `app/globals.css` lists woff2
+first, so only pre-2016 browsers ever fetch the TTF. The WOFF2 keeps all 740
+glyphs and the full `wght 200-800` axis — it is a re-compression, not a subset.
+
+`app/layout.tsx` also preloads it. Without that the font sits third in the
+critical chain (html, then css, then font) and delays first paint.
+
+To regenerate after replacing the TTF, with `fonttools` and `brotli`
+installed, load the TTF in fontTools, set `flavor = "woff2"` and save it
+alongside the original.
+
+---
+
+## 11. Headline sizes must stay viewport-relative
+
+Headings size off `--tp-headline-size` (set from `content/site.json`) through a
+`clamp()`. The middle term of that clamp has to be viewport-relative or the
+clamp does nothing: `clamp(48px, 92px, 160px)` is just `92px` at every width.
+That is what pushed the home hero 227 px past a 412 px phone viewport — the
+word "Opportunities." rendered 610 px wide and dragged the whole hero grid,
+body copy and buttons with it, so the page scrolled sideways.
+
+`.hero h1` now uses `clamp(34px, 13vw, var(--tp-headline-size, 92px))`, which
+still reaches the CMS-configured size from ~710 px up. The section headings
+(`.section-head h2`, `.case-grid h2`, `.final-cta h2`, `.inner-hero h1`, ...)
+get vw-based sizes below 560 px for the same reason.
+
+If you change a headline size in the admin panel, re-check the narrow widths.
+
+---
+
+## 12. Measuring performance — use the built site, not `npm run dev`
+
+Running Lighthouse against `npm run dev` measures React's development build:
+unminified bundles, the hot-reload client and the dev overlay. It reported
+900 ms of blocking time and a 1.8 MB page for a site that actually ships 0 ms
+and ~550 KB. Always measure the export instead — build it, symlink `out/` to a
+directory named `5am.earth-staging` so the `basePath` resolves, serve that
+directory, and point Lighthouse at
+`http://127.0.0.1:8099/5am.earth-staging/`.
+
+Two flags in that local run are artifacts of `python -m http.server` and do
+**not** apply to GitHub Pages, which was checked directly with `curl -I`:
+
+- *"Enable text compression"* — Pages returns `content-encoding: gzip`.
+- *"Serve static assets with an efficient cache policy"* — Pages returns
+  `cache-control: max-age=600` and gives you no way to configure it. Real, but
+  unfixable short of moving to a host or CDN you control.

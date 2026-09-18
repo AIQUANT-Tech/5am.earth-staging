@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_HALF } from "../../lib/imageSizes";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
@@ -29,7 +30,7 @@ export default function CaseStudies() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/finance-grid.png"} alt="Verified field evidence: a fingerprint, a wax seal, a satellite field boundary, and a farmer with a tablet" width={1200} height={1200} priority />
+              <Image src={hero?.image?.src || "/collage/finance-grid.webp"} alt="Verified field evidence: a fingerprint, a wax seal, a satellite field boundary, and a farmer with a tablet" width={1200} height={1200} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>

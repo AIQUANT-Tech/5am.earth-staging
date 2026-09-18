@@ -87,6 +87,7 @@ export interface SiteSettings {
   footerTagline: string;
   footerCopyright: string;
   footerMeta: string;
+  contactEmail: string; // shown as the footer mailto link; "" hides it
 }
 
 export interface SiteContent {
@@ -373,6 +374,7 @@ export function defaultContent(): SiteContent {
       footerTagline: "Grow trust. Create opportunity.",
       footerCopyright: "© {year} 5am.earth Foundation",
       footerMeta: "A neutral foundation for verified agricultural intelligence",
+      contactEmail: "yoram@5am.earth",
     },
   };
 
@@ -441,6 +443,10 @@ export function getContent(): SiteContent {
       parsed.settings.footerTagline = d.footerTagline;
       parsed.settings.footerCopyright = d.footerCopyright;
       parsed.settings.footerMeta = d.footerMeta;
+      needsSave = true;
+    }
+    if (parsed.settings.contactEmail === undefined) {
+      parsed.settings.contactEmail = defaultContent().settings.contactEmail;
       needsSave = true;
     }
     if (partnersSection && partnersSection.content.bullets === undefined) {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SIZES_HALF } from "../../lib/imageSizes";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
@@ -22,7 +23,7 @@ export default function Contact() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/soil-hand.png"} alt="A hand holding soil and a young sprout" width={1200} height={1000} priority />
+              <Image src={hero?.image?.src || "/collage/soil-hand.webp"} alt="A hand holding soil and a young sprout" width={1200} height={1000} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>

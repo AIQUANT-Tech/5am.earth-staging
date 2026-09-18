@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_HALF } from "../../lib/imageSizes";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
@@ -26,7 +27,7 @@ export default function UseCases() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/network-circle.png"} alt="Four farmers using phones, connected by dotted lines to a shared satellite field map at the center" width={1200} height={1200} priority />
+              <Image src={hero?.image?.src || "/collage/network-circle.webp"} alt="Four farmers using phones, connected by dotted lines to a shared satellite field map at the center" width={1200} height={1200} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>
@@ -52,10 +53,11 @@ export default function UseCases() {
             <div className="field-photos">
               <figure>
                 <Image
-                  src={evidence?.image?.src || "/collage/use-case-farmer.png"}
+                  src={evidence?.image?.src || "/collage/use-case-farmer.webp"}
                   alt="A field agent capturing field evidence with a phone, connected to a satellite field boundary map"
                   width={900} height={600}
                   style={evidence?.image ? { width: `${evidence.image.scale}%` } : undefined}
+                  sizes={SIZES_HALF}
                 />
                 <figcaption>
                   <b>{t(evidence, "photo1cap")}</b>
@@ -64,10 +66,11 @@ export default function UseCases() {
               </figure>
               <figure>
                 <Image
-                  src={evidence?.image2?.src || "/collage/network-satellite.png"}
+                  src={evidence?.image2?.src || "/collage/network-satellite.webp"}
                   alt="A farmer reviewing satellite field boundary data on a phone, linked to a fingerprint and identity record"
                   width={900} height={600}
                   style={evidence?.image2 ? { width: `${evidence.image2.scale}%` } : undefined}
+                  sizes={SIZES_HALF}
                 />
                 <figcaption>
                   <b>{t(evidence, "photo2cap")}</b>

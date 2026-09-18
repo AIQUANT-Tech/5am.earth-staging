@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_HALF } from "../../lib/imageSizes";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
@@ -25,7 +26,7 @@ export default function Team() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/team-woman.png"} alt="A field practitioner holding freshly harvested crop, part of the 5am.earth network" width={1200} height={1000} priority />
+              <Image src={hero?.image?.src || "/collage/team-woman.webp"} alt="A field practitioner holding freshly harvested crop, part of the 5am.earth network" width={1200} height={1000} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>

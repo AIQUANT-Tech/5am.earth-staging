@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_HALF } from "../../lib/imageSizes";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
 import SectionMedia from "../../components/SectionMedia";
@@ -34,7 +35,7 @@ export default function Partners() {
               <p>{t(hero, "body")}</p>
             </div>
             <div className="inner-hero-art" style={hero?.image ? { width: `${hero.image.scale}%` } : undefined}>
-              <Image src={hero?.image?.src || "/collage/network-map.png"} alt="Two partners' hands marking up a shared satellite field map, with a water tower and market linked in" width={1200} height={800} priority />
+              <Image src={hero?.image?.src || "/collage/network-map.webp"} alt="Two partners' hands marking up a shared satellite field map, with a water tower and market linked in" width={1200} height={800} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>
@@ -55,7 +56,7 @@ export default function Partners() {
               className="infographic-figure infographic-half"
               style={{ ...sectionStyle(infographic), ...(infographic?.image ? { width: `${infographic.image.scale}%` } : {}) }}
             >
-              <Image src={infographic?.image?.src || "/collage/partners-pair.png"} alt="Two field partners reviewing a satellite field map together" width={1240} height={920} />
+              <Image src={infographic?.image?.src || "/collage/partners-pair.webp"} alt="Two field partners reviewing a satellite field map together" width={1240} height={920} sizes={SIZES_HALF} />
             </div>
           )}
 

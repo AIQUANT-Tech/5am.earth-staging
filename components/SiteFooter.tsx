@@ -8,6 +8,9 @@ export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
     String(new Date().getFullYear())
   );
   const meta = settings?.footerMeta || "A neutral foundation for verified agricultural intelligence";
+  // The static site carried a footer mailto; it was dropped in the Next.js
+  // rewrite. Empty string in settings hides the link again.
+  const email = settings?.contactEmail ?? "yoram@5am.earth";
 
   return (
     <footer className="site-footer">
@@ -18,6 +21,15 @@ export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
             <p style={{ color: "var(--c-fg-muted)", fontSize: 14, marginTop: 8, maxWidth: 320 }}>
               {tagline}
             </p>
+            {email && (
+              <a className="footer-email" href={`mailto:${email}`}>
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="16" height="12" rx="2" />
+                  <path d="M2 7l8 5 8-5" />
+                </svg>
+                {email}
+              </a>
+            )}
           </div>
           <nav className="footer-links">
             <Link href="/process">The Process</Link>

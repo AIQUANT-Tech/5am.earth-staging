@@ -27,7 +27,11 @@ export default function SiteHeader({ pages }: { pages?: PageMeta[] }) {
   return (
     <header className="site-header">
       <div className="wrap header-bar">
-        <Link className="header-logo" href="/">
+        {/* prefetch={false}: on a static export with a basePath, Next's RSC
+            prefetch for the root route asks for `/5am.earth-staging.txt`,
+            which does not exist and logs a 404 on every page. Sub-routes
+            prefetch fine (`contact/index.txt`), so only "/" needs opting out. */}
+        <Link className="header-logo" href="/" prefetch={false}>
           <Image src="/img/symbol-black.png" alt="" width={26} height={26} />
           5am.earth
         </Link>
@@ -35,7 +39,7 @@ export default function SiteHeader({ pages }: { pages?: PageMeta[] }) {
           {nav.map(([label, href]) => {
             const isActive = href === "/" ? pathname === "/" : pathname?.startsWith(href);
             return (
-              <Link key={href} href={href} className={isActive ? "active" : undefined} aria-current={isActive ? "page" : undefined}>
+              <Link key={href} href={href} prefetch={href === "/" ? false : undefined} className={isActive ? "active" : undefined} aria-current={isActive ? "page" : undefined}>
                 {label}
               </Link>
             );

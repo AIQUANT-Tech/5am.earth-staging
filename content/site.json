@@ -48,7 +48,7 @@
         "cta2": "See the data"
       },
       "image": {
-        "src": "/uploads/1789366674884-ChatGPT-Image-Sep-14--2026--01_17_13-PM.png",
+        "src": "/uploads/1789366674884-ChatGPT-Image-Sep-14--2026--01_17_13-PM.webp",
         "scale": 100,
         "position": "right"
       }
@@ -109,7 +109,7 @@
         "cta": "See how verification works"
       },
       "image": {
-        "src": "/uploads/1789618214528-diagram_03_01.png",
+        "src": "/uploads/1789618214528-diagram_03_01.webp",
         "scale": 100,
         "position": "right"
       }
@@ -182,7 +182,7 @@
         "cta": "Read the case study"
       },
       "image": {
-        "src": "/uploads/1788351715639-pink-collage.png",
+        "src": "/uploads/1788351715639-pink-collage.webp",
         "scale": 100,
         "position": "left"
       }
@@ -208,7 +208,7 @@
         "bullets": "Help us build the world’s leading farmer community, powered by trusted information.”\n\nCreate more value through new applications and business opportunities."
       },
       "image": {
-        "src": "/collage/case-study-map.png",
+        "src": "/collage/case-study-map.webp",
         "scale": 100,
         "position": "left"
       }
@@ -252,7 +252,7 @@
         "body": "5am.earth connects local evidence with satellite checks, consent and a traceable record of origin."
       },
       "image": {
-        "src": "/uploads/1788435655209-teaminground.png",
+        "src": "/uploads/1788435655209-teaminground.webp",
         "scale": 100,
         "position": "right"
       }
@@ -281,7 +281,7 @@
         "s4b": "The farmer can permit the same record to support another service or decision."
       },
       "image": {
-        "src": "/collage/verification-stack-bone.png",
+        "src": "/collage/verification-stack-bone.webp",
         "scale": 100,
         "position": "right"
       }
@@ -346,7 +346,7 @@
         "body": "Each use case begins with evidence that has a source, a history and clear permission to be used."
       },
       "image": {
-        "src": "/uploads/1788346191229-ChatGPT-Image-Sep-2--2026--04_37_47-PM--.png",
+        "src": "/uploads/1788346191229-ChatGPT-Image-Sep-2--2026--04_37_47-PM--.webp",
         "scale": 92,
         "position": "right"
       }
@@ -383,12 +383,12 @@
         "photo2body": "Satellite imagery helps validate field boundaries and historical land signals."
       },
       "image": {
-        "src": "/collage/use-case-farmer.png",
+        "src": "/collage/use-case-farmer.webp",
         "scale": 100,
         "position": "right"
       },
       "image2": {
-        "src": "/collage/network-satellite.png",
+        "src": "/collage/network-satellite.webp",
         "scale": 100
       }
     },
@@ -474,7 +474,7 @@
         "body": "5am.earth brings together field networks, verification technology, infrastructure, and service providers. Every participant contributes something distinct and receives practical value."
       },
       "image": {
-        "src": "/collage/network-map.png",
+        "src": "/collage/network-map.webp",
         "scale": 100,
         "position": "right"
       }
@@ -494,7 +494,7 @@
       },
       "content": {},
       "image": {
-        "src": "/collage/partners-pair.png",
+        "src": "/collage/partners-pair.webp",
         "scale": 100,
         "position": "right"
       }
@@ -556,7 +556,7 @@
         "body": "5am.earth combines agricultural experience, field delivery, product thinking, Earth observation, and decentralized infrastructure."
       },
       "image": {
-        "src": "/uploads/1788355255790-fliped.png",
+        "src": "/uploads/1788355255790-fliped.webp",
         "scale": 100,
         "position": "right"
       }
@@ -618,7 +618,7 @@
         "body": "Tell us what you are trying to build, verify, fund, source, or understand. We will connect you with the right route."
       },
       "image": {
-        "src": "/uploads/1788352110248-ChatGPT-Image-Sep-2--2026--07_28_01-PM.png",
+        "src": "/uploads/1788352110248-ChatGPT-Image-Sep-2--2026--07_28_01-PM.webp",
         "scale": 100,
         "position": "right"
       }
@@ -663,7 +663,7 @@
         "body": "How field evidence, Earth observation, and secure provenance become practical infrastructure for agricultural services."
       },
       "image": {
-        "src": "/collage/finance-grid.png",
+        "src": "/collage/finance-grid.webp",
         "scale": 100,
         "position": "right"
       }
@@ -929,6 +929,7 @@
     "headerBg": "#F7F2EB",
     "footerTagline": "Grow trust. Create opportunities",
     "footerCopyright": "© {year} 5am.earth Foundation",
-    "footerMeta": "A neutral foundation for verified agricultural intelligence"
+    "footerMeta": "A neutral foundation for verified agricultural intelligence",
+    "contactEmail": "yoram@5am.earth"
   }
 }

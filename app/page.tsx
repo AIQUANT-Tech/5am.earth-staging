@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { SIZES_FULL, SIZES_HALF } from "../lib/imageSizes";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import SectionMedia from "../components/SectionMedia";
@@ -52,7 +53,7 @@ export default function Home() {
               className="hero-art"
               style={hero?.image ? { width: `${hero.image.scale}%`, marginLeft: hero.image.position === "left" ? 0 : "auto", marginRight: hero.image.position === "left" ? "auto" : 0 } : undefined}
             >
-              <Image src={hero?.image?.src || "/collage/hero-hands.png"} alt="A verified field record: hands holding soil and a sprout, an aerial farm boundary, and a field ledger" width={1600} height={1200} priority />
+              <Image src={hero?.image?.src || "/collage/hero-hands.webp"} alt="A verified field record: hands holding soil and a sprout, an aerial farm boundary, and a field ledger" width={1600} height={1200} priority sizes={SIZES_HALF} />
             </div>
           </div>
         </section>
@@ -104,10 +105,11 @@ export default function Home() {
 
             <div className="infographic-figure" style={verify?.image ? { width: `${verify.image.scale}%`, margin: "56px auto 0" } : undefined}>
               <Image
-                src={verify?.image?.src || "/collage/verification-stack-ink.png"}
+                src={verify?.image?.src || "/collage/verification-stack-ink.webp"}
                 alt="Verification stack: field evidence (people and place), satellite signals (boundaries and history), secure provenance (identity and consent), producing a verified field record that is grounded, traceable and reusable"
                 width={1680}
                 height={946}
+                sizes={SIZES_FULL}
               />
             </div>
 
@@ -168,7 +170,7 @@ export default function Home() {
         const mediaFirst = caseSec?.image?.position !== "right";
         const media = (
           <div className="case-media" style={caseSec?.image ? { width: `${caseSec.image.scale}%` } : undefined}>
-            <Image src={caseSec?.image?.src || "/collage/case-study-pink.png"} alt="A farmer holding harvested grain, connected to her farm ledger, produce basket, seedlings, and market records" width={1240} height={1240} />
+            <Image src={caseSec?.image?.src || "/collage/case-study-pink.webp"} alt="A farmer holding harvested grain, connected to her farm ledger, produce basket, seedlings, and market records" width={1240} height={1240} sizes={SIZES_HALF} />
           </div>
         );
         const text = (
@@ -199,7 +201,7 @@ export default function Home() {
         const mediaFirst = partnersSection?.image?.position !== "right";
         const media = (
           <div className="case-media" style={partnersSection?.image ? { width: `${partnersSection.image.scale}%` } : undefined}>
-            <Image src={partnersSection?.image?.src || "/collage/case-study-map.png"} alt="Farmers and a field agent reviewing a satellite field boundary map together" width={1240} height={920} />
+            <Image src={partnersSection?.image?.src || "/collage/case-study-map.webp"} alt="Farmers and a field agent reviewing a satellite field boundary map together" width={1240} height={920} sizes={SIZES_HALF} />
           </div>
         );
         const text = (
