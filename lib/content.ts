@@ -87,7 +87,11 @@ export interface SiteSettings {
   footerTagline: string;
   footerCopyright: string;
   footerMeta: string;
-  contactEmail: string; // shown as the footer mailto link; "" hides it
+  contactEmail: string; // where the mailto actually goes; "" hides the link
+  // What the link reads as. The 17/09 design shows the public-facing
+  // "contact@5am.earth" while mail is delivered to contactEmail. Leave empty
+  // to display the address itself.
+  contactEmailLabel: string;
 }
 
 export interface SiteContent {
@@ -375,6 +379,7 @@ export function defaultContent(): SiteContent {
       footerCopyright: "© {year} 5am.earth Foundation",
       footerMeta: "A neutral foundation for verified agricultural intelligence",
       contactEmail: "yoram@5am.earth",
+      contactEmailLabel: "contact@5am.earth",
     },
   };
 
@@ -447,6 +452,10 @@ export function getContent(): SiteContent {
     }
     if (parsed.settings.contactEmail === undefined) {
       parsed.settings.contactEmail = defaultContent().settings.contactEmail;
+      needsSave = true;
+    }
+    if (parsed.settings.contactEmailLabel === undefined) {
+      parsed.settings.contactEmailLabel = defaultContent().settings.contactEmailLabel;
       needsSave = true;
     }
     if (partnersSection && partnersSection.content.bullets === undefined) {

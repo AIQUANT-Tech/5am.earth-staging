@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { SiteSettings } from "../lib/content";
 
 export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
@@ -8,9 +7,11 @@ export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
     String(new Date().getFullYear())
   );
   const meta = settings?.footerMeta || "A neutral foundation for verified agricultural intelligence";
-  // The static site carried a footer mailto; it was dropped in the Next.js
-  // rewrite. Empty string in settings hides the link again.
+  // Destination vs. label are separate on purpose: the 17/09 design shows the
+  // public "contact@5am.earth" while mail is delivered to contactEmail.
+  // Empty contactEmail hides the link.
   const email = settings?.contactEmail ?? "yoram@5am.earth";
+  const emailLabel = settings?.contactEmailLabel || email;
 
   return (
     <footer className="site-footer">
@@ -23,22 +24,10 @@ export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
             </p>
             {email && (
               <a className="footer-email" href={`mailto:${email}`}>
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="2" y="4" width="16" height="12" rx="2" />
-                  <path d="M2 7l8 5 8-5" />
-                </svg>
-                {email}
+                {emailLabel}
               </a>
             )}
           </div>
-          <nav className="footer-links">
-            <Link href="/process">The Process</Link>
-            <Link href="/use-cases">Use Cases</Link>
-            <Link href="/partners">Our Partners</Link>
-            <Link href="/team">Company Team</Link>
-            <Link href="/case-studies">Case Studies</Link>
-            <Link href="/contact">Contact us</Link>
-          </nav>
         </div>
         <div className="footer-wordmark">5am.earth</div>
         <div className="footer-meta">

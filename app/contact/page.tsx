@@ -39,6 +39,17 @@ export default function Contact() {
               <span>{t(form, "o3")}</span>
               <span>{t(form, "o4")}</span>
             </div>
+            {/* From the designer's 17/09 pass: shows the public-facing label
+                while mail is delivered to settings.contactEmail. */}
+            {content.settings?.contactEmail && (
+              <a
+                className="text-link"
+                style={{ color: "#fff", display: "inline-block", marginTop: 8 }}
+                href={`mailto:${content.settings.contactEmail}`}
+              >
+                {content.settings.contactEmailLabel || content.settings.contactEmail}
+              </a>
+            )}
             <SectionMedia section={form} alt="How to work with 5am.earth" />
           </div>
           <ContactForm />
