@@ -355,6 +355,17 @@ directory named `5am.earth-staging` so the `basePath` resolves, serve that
 directory, and point Lighthouse at
 `http://127.0.0.1:8099/5am.earth-staging/`.
 
+**Do not run `npm run build` while `npm run dev` is running.** Both write to
+`.next`, so the build pulls the chunks out from under the dev server and every
+request starts failing with `Error: Cannot find module './948.js'`
+(`MODULE_NOT_FOUND`, stack pointing at `.next/server/webpack-runtime.js`). The
+code is fine; the dev server's cache is not. Recover with:
+
+```bash
+# stop the dev server, then
+rm -rf .next && npm run dev
+```
+
 Two flags in that local run are artifacts of `python -m http.server` and do
 **not** apply to GitHub Pages, which was checked directly with `curl -I`:
 

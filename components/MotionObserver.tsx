@@ -2,20 +2,11 @@
 
 import { useEffect } from "react";
 
-const REVEAL_SELECTOR = [
-  ".cell",
-  ".stat-cell",
-  ".team-card",
-  ".quote-block",
-  ".pilot-band",
-  ".partner-logos > div",
-  ".field-photos figure",
-  ".section-head",
-  ".case-media",
-  ".infographic-figure",
-  ".outcome-grid > div",
-].join(", ");
-
+// Scroll-reveal is no longer set up here — it moved to an inline script at the
+// end of <body> (see REVEAL_SCRIPT in app/layout.tsx) so that content hidden by
+// `html.js ...:not(.in-view)` is not waiting on the React bundle to hydrate.
+// This component now only drives the number count-up, which is decorative and
+// can safely wait.
 const COUNT_SELECTOR = ".stat-cell strong, .pilot-stats b";
 
 function animateCount(el: Element) {
@@ -50,31 +41,10 @@ function animateCount(el: Element) {
 
 export default function MotionObserver() {
   useEffect(() => {
-    // The `js` class itself is added synchronously by an inline script in
-    // <head> (see layout.tsx) so reveal-hidden content is never visible
-    // before this effect runs — this only wires up the observers.
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
 
-    const revealTargets = Array.from(document.querySelectorAll(REVEAL_SELECTOR));
     const countTargets = Array.from(document.querySelectorAll(COUNT_SELECTOR));
-
-    if (reduceMotion) {
-      revealTargets.forEach((el) => el.classList.add("in-view"));
-      return;
-    }
-
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
-    );
-    revealTargets.forEach((el) => revealObserver.observe(el));
 
     const countObserver = new IntersectionObserver(
       (entries, observer) => {
@@ -90,7 +60,6 @@ export default function MotionObserver() {
     countTargets.forEach((el) => countObserver.observe(el));
 
     return () => {
-      revealObserver.disconnect();
       countObserver.disconnect();
     };
   }, []);
