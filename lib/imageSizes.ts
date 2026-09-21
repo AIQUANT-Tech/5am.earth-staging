@@ -2,7 +2,7 @@
  * `sizes` values for next/image.
  *
  * Without `sizes`, next/image emits a 1x/2x srcset based on the declared
- * `width` prop — which for these collages is the full source width, so every
+ * `width` prop - which for these collages is the full source width, so every
  * viewport downloads the largest variant. Telling it the real CSS layout width
  * lets the browser pick from the ladder in lib/imageLoader.ts instead.
  *
@@ -15,10 +15,10 @@
  * too small renders visibly soft.
  */
 
-/** Image spans the full content column — e.g. `.infographic-figure`. */
+/** Image spans the full content column - e.g. `.infographic-figure`. */
 export const SIZES_FULL =
   "(max-width: 560px) calc(100vw - 28px), (max-width: 1328px) calc(100vw - 48px), 1280px";
 
-/** Image sits in one half of a two-column grid — hero art, case media. */
+/** Image sits in one half of a two-column grid - hero art, case media. */
 export const SIZES_HALF =
   "(max-width: 560px) calc(100vw - 28px), (max-width: 900px) calc(100vw - 48px), 640px";

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-// Scroll-reveal is no longer set up here — it moved to an inline script at the
+// Scroll-reveal is no longer set up here - it moved to an inline script at the
 // end of <body> (see REVEAL_SCRIPT in app/layout.tsx) so that content hidden by
 // `html.js ...:not(.in-view)` is not waiting on the React bundle to hydrate.
 // This component now only drives the number count-up, which is decorative and
@@ -27,7 +27,10 @@ function animateCount(el: Element) {
     const eased = 1 - Math.pow(1 - progress, 3);
     const value = target * eased;
     const formatted = hasGrouping
-      ? value.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+      ? value.toLocaleString("en-US", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        })
       : value.toFixed(decimals);
     el.textContent = formatted + suffix;
     if (progress < 1) {
@@ -41,7 +44,9 @@ function animateCount(el: Element) {
 
 export default function MotionObserver() {
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     if (reduceMotion) return;
 
     const countTargets = Array.from(document.querySelectorAll(COUNT_SELECTOR));
@@ -55,7 +60,7 @@ export default function MotionObserver() {
           }
         });
       },
-      { threshold: 0.4 }
+      { threshold: 0.4 },
     );
     countTargets.forEach((el) => countObserver.observe(el));
 

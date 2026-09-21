@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Prepare public/ images for the static export.
 
-Two jobs, both idempotent — re-running only does the work that is missing:
+Two jobs, both idempotent - re-running only does the work that is missing:
 
   1. Re-encode every PNG in public/collage and public/uploads to WebP. The
      collages are large-canvas artwork; as PNG they run ~2 MB each, as WebP
@@ -14,7 +14,7 @@ Two jobs, both idempotent — re-running only does the work that is missing:
      exactly what the browser downloads. The loader maps a requested width
      onto one of these files.
 
-Ladder widths are capped at the source width — asking for 1280w from a
+Ladder widths are capped at the source width - asking for 1280w from a
 1192px-wide original just re-encodes at 1192px rather than upscaling, so a
 variant is never larger than the original.
 

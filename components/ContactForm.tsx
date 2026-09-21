@@ -2,14 +2,16 @@
 
 import { useRef, useState } from "react";
 
-// Google Apps Script web app. It holds no secret — it only knows how to email
+// Google Apps Script web app. It holds no secret - it only knows how to email
 // a fixed recipient, so it is safe for this URL to be public. Same endpoint
 // the previous static site used.
 const CONTACT_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbzIDQm_lpcfvms-GzhS87IMhG2Flz4adI2g2auOZ8gwQUw-tCICRKs2IG3mY0yWRHbnbw/exec";
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
   const renderedAt = useRef(Date.now());
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -53,16 +55,27 @@ export default function ContactForm() {
       </label>
       <label>
         Work email
-        <input name="email" type="email" placeholder="name@organization.com" required />
+        <input
+          name="email"
+          type="email"
+          placeholder="name@organization.com"
+          required
+        />
       </label>
       <label>
         Organization
-        <input name="organization" type="text" placeholder="Organization name" />
+        <input
+          name="organization"
+          type="text"
+          placeholder="Organization name"
+        />
       </label>
       <label>
         How can we work together?
         <select name="role" defaultValue="">
-          <option value="" disabled>Select a route</option>
+          <option value="" disabled>
+            Select a route
+          </option>
           <option>Access verified information</option>
           <option>Build a solution</option>
           <option>Contribute data</option>
@@ -72,7 +85,11 @@ export default function ContactForm() {
       </label>
       <label>
         Message
-        <textarea name="message" placeholder="Tell us about your goal" rows={5} />
+        <textarea
+          name="message"
+          placeholder="Tell us about your goal"
+          rows={5}
+        />
       </label>
       {/* Honeypot: hidden from humans, bots fill it in. Submissions with this set are dropped server-side. */}
       <input
@@ -81,7 +98,13 @@ export default function ContactForm() {
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
-        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: 1,
+          height: 1,
+          opacity: 0,
+        }}
       />
       <button
         className="btn btn-ink"
@@ -91,9 +114,15 @@ export default function ContactForm() {
       >
         {status === "sending" ? "Sending…" : "Send inquiry"}
       </button>
-      {status === "sent" && <small>Message sent! We&apos;ll be in touch within 5 business days.</small>}
+      {status === "sent" && (
+        <small>
+          Message sent! We&apos;ll be in touch within 5 business days.
+        </small>
+      )}
       {status === "error" && <small>Network error. Please try again.</small>}
-      {status === "idle" && <small>We respond to qualified inquiries within 5 business days.</small>}
+      {status === "idle" && (
+        <small>We respond to qualified inquiries within 5 business days.</small>
+      )}
     </form>
   );
 }
