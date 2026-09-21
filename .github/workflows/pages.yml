@@ -36,7 +36,12 @@ jobs:
         run: npm ci
 
       - name: Build static export
+        # GitHub Pages serves this repo from a sub-path, so the app has to be
+        # built with a matching basePath. Production (5am.earth) serves from
+        # the domain root and deliberately leaves this unset.
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /5am.earth-staging
 
       - name: Add .nojekyll
         run: touch out/.nojekyll

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { getContent, typographyCss, siteSettingsCss } from "../lib/content";
+import {
+  getContent,
+  typographyCss,
+  siteSettingsCss,
+  fontFaceCss,
+} from "../lib/content";
 import { asset } from "../lib/imageLoader";
 import MotionObserver from "../components/MotionObserver";
 
@@ -17,7 +22,7 @@ const REVEAL_SELECTOR =
  * The inline script in <head> adds `js`, which immediately sets every element
  * above to opacity: 0. If the thing that adds `in-view` back only runs after
  * hydration, all that content stays invisible until ~106 kB of JS has
- * downloaded and parsed — about 2s on a simulated slow 4G connection. On
+ * downloaded and parsed - about 2s on a simulated slow 4G connection. On
  * /process/ that is nearly the whole page below the hero, so anyone scrolling
  * early sees blank gaps and reasonably concludes the page is still loading.
  *
@@ -71,15 +76,28 @@ export default function RootLayout({
           href={asset("/fonts/Manrope-VariableFont_wght.woff2")}
           crossOrigin="anonymous"
         />
-        <style dangerouslySetInnerHTML={{ __html: typographyCss(content.typography) }} />
-        <style dangerouslySetInnerHTML={{ __html: siteSettingsCss(content.settings) }} />
+        <style dangerouslySetInnerHTML={{ __html: fontFaceCss() }} />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: typographyCss(content.typography),
+          }}
+        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: siteSettingsCss(content.settings),
+          }}
+        />
         {/* Runs before first paint so scroll-reveal CSS never flashes visible content. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
       </head>
       <body>
         {children}
         {/* Placed after the content so the nodes exist, and before the async
-            bundle runs — reveal no longer waits on hydration. */}
+            bundle runs - reveal no longer waits on hydration. */}
         <script dangerouslySetInnerHTML={{ __html: REVEAL_SCRIPT }} />
         <MotionObserver />
       </body>

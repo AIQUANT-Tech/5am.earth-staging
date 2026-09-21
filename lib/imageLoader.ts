@@ -1,4 +1,7 @@
-const BASE_PATH = "/5am.earth-staging";
+// Same source of truth as next.config.mjs. The NEXT_PUBLIC_ prefix is load
+// bearing: this module runs in the browser, so the value has to be inlined at
+// build time rather than read from the environment at runtime.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 // Keep in sync with LADDER in scripts/optimize-images.py and `deviceSizes` in
 // next.config.mjs.
@@ -17,15 +20,22 @@ export function asset(src: string) {
 
 /**
  * next.config.mjs sets `output: "export"`, so Next does no image optimization
- * of its own — this loader is the whole pipeline. It maps the width next/image
+ * of its own - this loader is the whole pipeline. It maps the width next/image
  * asks for onto the nearest pre-generated variant, which is what turns the
  * emitted `srcset` into a real responsive image instead of the same file
  * repeated at 1x/2x.
  *
  * Widths above the ladder clamp to the largest variant, which the generator
- * caps at the source width — so we never serve an upscale.
+ * caps at the source width - so we never serve an upscale.
  */
-export default function imageLoader({ src, width }: { src: string; width: number; quality?: number }) {
+export default function imageLoader({
+  src,
+  width,
+}: {
+  src: string;
+  width: number;
+  quality?: number;
+}) {
   if (/^https?:\/\//.test(src)) return src;
 
   const match = src.match(RESPONSIVE_DIR);

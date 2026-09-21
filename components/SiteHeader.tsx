@@ -29,7 +29,7 @@ export default function SiteHeader({ pages }: { pages?: PageMeta[] }) {
     <header className="site-header">
       <div className="wrap header-bar">
         {/* prefetch={false}: on a static export with a basePath, Next's RSC
-            prefetch for the root route asks for `/5am.earth-staging.txt`,
+            prefetch for the root route asks for `<basePath>.txt`,
             which does not exist and logs a 404 on every page. Sub-routes
             prefetch fine (`contact/index.txt`), so only "/" needs opting out. */}
         <Link className="header-logo" href="/" prefetch={false} onClick={() => setMenuOpen(false)}>

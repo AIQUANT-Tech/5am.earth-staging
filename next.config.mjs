@@ -1,3 +1,9 @@
+// Empty for production (5am.earth serves from the domain root); the staging
+// workflow sets NEXT_PUBLIC_BASE_PATH=/5am.earth-staging because GitHub Pages
+// serves that repo from a sub-path. Keep it in step with lib/imageLoader.ts,
+// which reads the same variable for client-side asset URLs.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
@@ -14,8 +20,10 @@ const nextConfig = {
     // resolves below ~330px.
     imageSizes: [256],
   },
-  basePath: "/5am.earth-staging",
-  assetPrefix: "/5am.earth-staging/",
+  basePath: BASE_PATH,
+  // undefined rather than "/" - Next treats a bare "/" as a real prefix and
+  // emits double slashes in asset URLs.
+  assetPrefix: BASE_PATH ? `${BASE_PATH}/` : undefined,
   trailingSlash: true,
 };
 export default nextConfig;
