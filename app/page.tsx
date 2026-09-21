@@ -5,6 +5,7 @@ import { SIZES_FULL, SIZES_HALF } from "../lib/imageSizes";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import SectionMedia from "../components/SectionMedia";
+import DemoButton from "../components/DemoButton";
 import { getContent, getSection, sectionStyle, sectionClassName, t } from "../lib/content";
 import { asset } from "../lib/imageLoader";
 
@@ -46,7 +47,10 @@ export default function Home() {
               </div>
               <div className="hero-actions">
                 <Link className="btn btn-green" href="/contact">{t(hero, "cta1")}</Link>
-                <a className="btn btn-ink" href="#network">{t(hero, "cta2")}</a>
+                {/* Was an anchor to #network, but that section is hidden in the
+                    CMS so the target never rendered and the button did nothing.
+                    Opens the demo modal instead, same as the header CTA. */}
+                <DemoButton className="btn btn-ink">{t(hero, "cta2")}</DemoButton>
               </div>
             </div>
             <div

@@ -168,16 +168,27 @@ and sufficient for this site.
 
 ## 8. Where the contact email addresses live
 
-There are **two separate** addresses, changed in two different places.
+There are **two separate** addresses, and they are deliberately different.
+Changing one does not change the other, and they live in different places:
+
+| What | Address | Set where |
+|---|---|---|
+| The `mailto:` links (footer, contact page) | **info@5am.earth** | `content/site.json` in this repo — see 8a |
+| Where contact-form submissions are delivered | **yoram@5am.earth** | inside the Google Apps Script — see 8b |
+
+This split is intentional: the site shows a public inbox, while form
+submissions route to Yoram. Do not "fix" one to match the other.
 
 ### 8a. The address shown in the footer — in this repo
 
-`content/site.json` → `settings.contactEmail` (currently `yoram@5am.earth`).
+`content/site.json` → `settings.contactEmail` (currently `info@5am.earth`).
+`settings.contactEmailLabel` overrides the text shown; it is empty, so the
+address itself is displayed.
 Rendered by `components/SiteFooter.tsx` as a `mailto:` link. Setting it to an
 empty string hides the link. The default, used when the key is missing, is in
 `lib/content.ts` → `defaultContent().settings.contactEmail`.
 
-### 8b. Who the contact form emails — NOT in this repo
+### 8b. Who the contact form emails — `yoram@5am.earth`, NOT in this repo
 
 `components/ContactForm.tsx` POSTs to a Google Apps Script web app:
 
@@ -191,8 +202,10 @@ form submissions land. To change it:
 
 1. Open <https://script.google.com> with the Google account that owns the script.
 2. Open the project behind the `/exec` URL above.
-3. In `Code.gs`, change the recipient passed to `MailApp.sendEmail(...)` /
-   `GmailApp.sendEmail(...)` to `yoram@5am.earth`.
+3. In `Code.gs`, set the recipient passed to `MailApp.sendEmail(...)` /
+   `GmailApp.sendEmail(...)` to **`yoram@5am.earth`**. This stays Yoram even
+   though the visible `mailto:` links are `info@5am.earth` — see the table
+   above.
 4. **Deploy → Manage deployments → edit the active deployment → Deploy.**
    Editing the code alone does nothing until it is redeployed; a *new*
    deployment produces a new `/exec` URL, which would also have to be updated

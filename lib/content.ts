@@ -88,9 +88,9 @@ export interface SiteSettings {
   footerCopyright: string;
   footerMeta: string;
   contactEmail: string; // where the mailto actually goes; "" hides the link
-  // What the link reads as. The 17/09 design shows the public-facing
-  // "contact@5am.earth" while mail is delivered to contactEmail. Leave empty
-  // to display the address itself.
+  // What the link reads as, when it should differ from the address (the 17/09
+  // design briefly showed a different public address). Leave empty — the
+  // current setting — to display contactEmail itself.
   contactEmailLabel: string;
 }
 
@@ -378,8 +378,8 @@ export function defaultContent(): SiteContent {
       footerTagline: "Grow trust. Create opportunity.",
       footerCopyright: "© {year} 5am.earth Foundation",
       footerMeta: "A neutral foundation for verified agricultural intelligence",
-      contactEmail: "yoram@5am.earth",
-      contactEmailLabel: "contact@5am.earth",
+      contactEmail: "info@5am.earth",
+      contactEmailLabel: "",
     },
   };
 

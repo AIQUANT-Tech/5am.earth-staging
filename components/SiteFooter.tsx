@@ -7,10 +7,10 @@ export default function SiteFooter({ settings }: { settings?: SiteSettings }) {
     String(new Date().getFullYear())
   );
   const meta = settings?.footerMeta || "A neutral foundation for verified agricultural intelligence";
-  // Destination vs. label are separate on purpose: the 17/09 design shows the
-  // public "contact@5am.earth" while mail is delivered to contactEmail.
-  // Empty contactEmail hides the link.
-  const email = settings?.contactEmail ?? "yoram@5am.earth";
+  // Label and destination are both info@5am.earth; contactEmailLabel is left
+  // empty in settings so it falls back to the address and the two cannot drift
+  // apart. Empty contactEmail hides the link entirely.
+  const email = settings?.contactEmail ?? "info@5am.earth";
   const emailLabel = settings?.contactEmailLabel || email;
 
   return (
