@@ -373,3 +373,34 @@ Two flags in that local run are artifacts of `python -m http.server` and do
 - *"Serve static assets with an efficient cache policy"* — Pages returns
   `cache-control: max-age=600` and gives you no way to configure it. Real, but
   unfixable short of moving to a host or CDN you control.
+
+## 13. Standalone HTML pages (unlisted routes)
+
+Anything dropped in `public/` is copied into `out/` byte-for-byte by
+`next build`, and the Pages workflow uploads all of `out/`. So a hand-authored
+HTML file becomes a public URL with no routing work and no Next involvement:
+
+```
+public/<name>.html  ->  https://aiquant-tech.github.io/5am.earth-staging/<name>.html
+```
+
+Currently live this way:
+
+| File | URL path | Notes |
+| --- | --- | --- |
+| `public/5am-earth-editorial-design.html` | `/5am.earth-staging/5am-earth-editorial-design.html` | Donor Briefing 2026. Self-contained: fonts and artwork are inline base64, so it has no asset dependencies. |
+
+Points worth knowing:
+
+- **It is unlisted, not private.** Nothing in the site links to it and there is
+  no sitemap, so it is only reachable by someone who has the URL — but anyone
+  with the URL can open it, and a search engine will index it if the link is
+  ever posted somewhere public. If it needs to stay out of search results, add
+  `<meta name="robots" content="noindex">` to its `<head>`.
+- **`trailingSlash: true` does not apply.** That setting shapes Next's own
+  generated routes; a file in `public/` is served at its exact filename, with
+  no trailing slash and no directory form.
+- **Keep the filename URL-safe** (lowercase, hyphens, no spaces) — it becomes
+  the public path verbatim.
+- **Do not give it a name that collides with a route.** `public/contact.html`
+  and the `/contact/` page would both want the same area of the URL space.
